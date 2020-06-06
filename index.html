@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jsCode.js" defer></script>
+    <script src="jszip.min.js" defer></script>
+    <script src="FileSaver.min.js" defer></script>
+    
+    <title>Document</title>
+</head>
+<body>
+
+<section>
+    <h1>Export Types</h1>
+    <input type='checkbox' name='read' checked>
+    <label for='read'>
+        block -> score
+      </label><br>
+    <input type='checkbox' name='opSetblock'>
+    <label for='opSetblock'>
+        setblock ~ ~ ~ [block]
+      </label><br>
+    <input type='checkbox' name='opFallBlock'>
+      <label for='opFallBlock'>
+        summon falling_block ~ ~ ~ {Time:1,{block}}
+    </label><br>
+    <input type='checkbox' name='opMirrored'>
+    <label for='opMirrored'>
+      setblock ~ ~ ~ [mirrored block]
+    </label><br>
+    <div>
+      <span>Custom Output Command</span><br>
+      <span>$id = Block ID, $block = Block,</span><br>
+      <span>$props = Properties(ie. east=true), $nprops = (ie. east:true)</span><br>
+      <input type='checkbox' name='customOutputCK'>
+      <input size="80" type="text" name="customOutput" value = "execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!"><br>
+    </div>
+    <div>
+      <span>Custom Input Command</span><br>
+      <span>Same rules, can be used for instant action.</span><br>
+      <span>Example, instantly converts block to sand</span><br>
+      <input type='checkbox' name='customInputCK'>
+      <input size="80" type="text" name="customInput" value = 'execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'><br>
+    </div>
+    <input type='button' name='getZip' onclick="get_zip()" value = "Download Pack" id="blob">
+    <br>
+    <div id="pbarDiv" style="visibility:hidden">
+      <label for="progress_bar">Downloading:</label>
+      <progress id="progress_bar" value="0" max="100"> 0% </progress>
+    </div>
+</section>
+</body>
+</html>
