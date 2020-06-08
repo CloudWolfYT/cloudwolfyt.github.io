@@ -1,0 +1,111 @@
+*, *::before, *::after
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html, body
+{
+    width: 100vw;
+    height: 100vh;
+    background: #222;
+}
+
+.main-section
+{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: white;
+    background: #333;
+    box-shadow: 0 10px 20px black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: center;
+    width: 70%;
+}
+
+.main-title
+{
+    font-size: 6vmin;
+    text-align: center;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+
+.checkboxes
+{
+    margin-bottom: 20px;
+}
+
+input[type="checkbox"]
+{
+    cursor: pointer;
+}
+
+.section
+{
+    width: 80%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-title
+{
+    font-weight: 300;
+    font-size: 3vmin;
+    margin-bottom: 10px;
+}
+
+.description
+{
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.text-field
+{
+    outline: none;
+    padding: 3px 5px;
+    width: 50%;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: border-color 200ms;
+}
+
+.text-field:focus
+{
+    border-color: #0066ff;
+}
+
+.button
+{
+    padding: 10px 20px;
+    color: white;
+    border: 2px solid #0066ff;
+    outline: none;
+    background: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.button:focus, .button:hover
+{
+    background: #0066ff;
+}
+
+.progress-container
+{
+
+}
