@@ -37,6 +37,7 @@ html, body
     text-align: center;
     font-weight: 200;
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .checkboxes
@@ -80,12 +81,13 @@ input[type="checkbox"]
     color: white;
     font-size: 2.4vmin;
     background: #444;
-    transition: border-color 200ms;
+    transition: 200ms;
 }
 
 .text-field:focus
 {
     border-color: #0066ff;
+    background: none;
 }
 
 .button
@@ -98,14 +100,10 @@ input[type="checkbox"]
     border-radius: 0.2rem;
     cursor: pointer;
     transition: 200ms;
+    margin-bottom: 20px;
 }
 
 .button:focus, .button:hover
 {
     background: #0066ff;
-}
-
-.progress-container
-{
-
 }
