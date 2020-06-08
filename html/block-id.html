@@ -23,13 +23,13 @@
 		<label for="read">block -> score</label><br>
 
 		<input type="checkbox" name="opSetblock">
-		<label for="opSetblock">setblock ~ ~ ~ [block]</label><br>
+		<label for="opSetblock">setblock ~ ~ ~ $block</label><br>
 
 		<input type="checkbox" name="opFallBlock">
-		<label for="opFallBlock">summon falling_block ~ ~ ~ {Time:1,{block}}</label><br>
+		<label for="opFallBlock">summon falling_block ~ ~ ~ {Time:1,{$block}}</label><br>
 
 		<input type="checkbox" name="opMirrored">
-		<label for="opMirrored">setblock ~ ~ ~ [mirrored block]</label><br>
+		<label for="opMirrored">setblock ~ ~ ~ $block(but mirrored)</label><br>
 	</div>
 
     <div class="section">
@@ -37,7 +37,7 @@
       	<p class="description">$id = Block ID, $block = Block, <br> 
 		  $props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
 		<label for="customOutputName">Branch Name:</label>
-		<input class="text-field" type="text" name="customOutputName" value = "custom_out"><br>
+		<input class="text-field" type="text" name="customOutputName" value = "custom_out" style="width:39%;"><br>
 		<input type="checkbox" name="customOutputCK">
       	<input class="text-field" type="text" name="customOutput" value = 'execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!'>
 	</div>
@@ -47,7 +47,7 @@
       	<p class="description">Same rules, can be used for instant action. <br> 
 		  Example, instantly converts block to sand</p>
 		  <label for="customInputName">Branch Name:</label>
-		  <input class="text-field" type="text" name="customInputName" value = "custom_in"><br>
+		  <input class="text-field" type="text" name="customInputName" value = "custom_in" style="width:39%;"><br>
 		  <input type="checkbox" name="customInputCK">
       	<input class="text-field" type="text" name="customInput" value = 'execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
 	</div>
