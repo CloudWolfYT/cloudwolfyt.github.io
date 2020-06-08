@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/block-id.js" defer></script>
+    <script src="../js/jszip.min.js" defer></script>
+    <script src="../js/FileSaver.min.js" defer></script>
+
+	<link href="../css/styles.css" rel="stylesheet" type="text/css">
+    
+    <title>Block ID Packager</title>
+</head>
+<body>
+
+<section class="main-section">
+	<h1 class="main-title">Block ID Packager</h1>
+	<p class="description">JS by: Cloud Wolf</p>
+	<p class="description">CSS by: MightyCoderX</p> <br>
+
+	<div class="checkboxes">
+		<input type="checkbox" name="read" checked>
+		<label for="read">block -> score</label><br>
+
+		<input type="checkbox" name="opSetblock">
+		<label for="opSetblock">setblock ~ ~ ~ [block]</label><br>
+
+		<input type="checkbox" name="opFallBlock">
+		<label for="opFallBlock">summon falling_block ~ ~ ~ {Time:1,{block}}</label><br>
+
+		<input type="checkbox" name="opMirrored">
+		<label for="opMirrored">setblock ~ ~ ~ [mirrored block]</label><br>
+	</div>
+
+    <div class="section">
+		<p class="section-title">Custom Output Command</p>
+      	<p class="description">$id = Block ID, $block = Block, <br> 
+		  $props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
+		<label for="customOutputName">Branch Name:</label>
+		<input class="text-field" type="text" name="customOutputName" value = "custom_out"><br>
+		<input type="checkbox" name="customOutputCK">
+      	<input class="text-field" type="text" name="customOutput" value = 'execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!'>
+	</div>
+
+    <div class="section">
+      	<p class="section-title">Custom Input Command</p>
+      	<p class="description">Same rules, can be used for instant action. <br> 
+		  Example, instantly converts block to sand</p>
+		  <label for="customInputName">Branch Name:</label>
+		  <input class="text-field" type="text" name="customInputName" value = "custom_in"><br>
+		  <input type="checkbox" name="customInputCK">
+      	<input class="text-field" type="text" name="customInput" value = 'execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
+	</div>
+
+    <button class="button" name="getZip" onclick="get_zip()" id="blob">Download Pack</button>
+    <div class="progress-container" id="pbarDiv" style="visibility:hidden">
+      	<label for="progress_bar">Downloading:</label>
+      	<progress id="progress_bar" value="0" max="100"> 0% </progress>
+    </div>
+</section>
+</body>
+</html>
