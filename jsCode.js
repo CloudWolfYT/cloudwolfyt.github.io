@@ -5,7 +5,7 @@ var pbar = document.getElementById("progress_bar");
 
 function get_zip() {
   pbar.value = 0;
-  document.getElementById("pbarDiv").style = "visibility:shown";
+  //document.getElementById("pbarDiv").style = "visibility:shown";
   document.getElementsByName('getZip').checked = false;
   get_jsons("./blocks.json");
 }
@@ -32,12 +32,10 @@ function get_zip1() {
   }
   
   if(document.getElementsByName('customOutputCK')[0].checked) {
-    zip.folder("bsc/functions/custom_out");
-    parse_output(zip,tree,"custom_out",document.getElementsByName("customOutput")[0].value);
+    parse_output(zip,tree,document.getElementsByName('customOutputName')[0].value,document.getElementsByName("customOutput")[0].value);
   }
   if(document.getElementsByName('customInputCK')[0].checked) {
-    zip.folder("bsc/functions/custom_in");
-    parse_input(zip,tree,"custom_in",document.getElementsByName("customInput")[0].value);
+    parse_input(zip,tree,document.getElementsByName('customInputName')[0].value,document.getElementsByName("customInput")[0].value);
   }
 
   getDatapack(zip);
@@ -45,7 +43,7 @@ function get_zip1() {
 async function getDatapack(zip) {
   const content = await zip.generateAsync({ type: "blob" });
   saveAs(content, `cw_bsc_namespace.zip`);
-  document.getElementById("pbarDiv").style = "visibility:hidden";
+  //document.getElementById("pbarDiv").style = "visibility:hidden";
 }
 
 function get_jsons(block_list) { //transforms the blocks.json into a full length object
