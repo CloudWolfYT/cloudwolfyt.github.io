@@ -9,12 +9,12 @@
 
 	<link rel="stylesheet" href="style.css">
     
-    <title>Block Serializer Packager</title>
+    <title>Block ID Packager</title>
 </head>
 <body>
 
 <section class="main-section">
-	<h1 class="main-title">Block Serializer Packager</h1>
+	<h1 class="main-title">Block ID Packager</h1>
 	<p class="description">JS by: Cloud Wolf</p>
 	<p class="description">CSS by: MightyCoderX</p> <br>
 
@@ -33,9 +33,11 @@
 	</div>
 
     <div class="section">
-      	<p class="section-title">Custom Output Command</p>
+		<p class="section-title">Custom Output Command</p>
       	<p class="description">$id = Block ID, $block = Block, <br> 
 		  $props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
+		<label for="customOutputName">Branch Name:</label>
+		<input class="text-field" type="text" name="customOutputName" value = "custom_out"><br>
 		<input type="checkbox" name="customOutputCK">
       	<input class="text-field" type="text" name="customOutput" value = 'execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!'>
 	</div>
@@ -44,6 +46,8 @@
       	<p class="section-title">Custom Input Command</p>
       	<p class="description">Same rules, can be used for instant action. <br> 
 		  Example, instantly converts block to sand</p>
+		  <label for="customInputName">Branch Name:</label>
+		  <input class="text-field" type="text" name="customInputName" value = "custom_in"><br>
 		  <input type="checkbox" name="customInputCK">
       	<input class="text-field" type="text" name="customInput" value = 'execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
 	</div>
