@@ -20,7 +20,7 @@ html, body
     top: 50%;
     left: 50%;
     color: white;
-    background: #292929;
+    background: #333;
     box-shadow: 0 10px 20px black;
     padding: 20px;
     display: flex;
