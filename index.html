@@ -14,7 +14,9 @@
 <body>
 
 <section class="main-section">
-    <h1 class="main-title">Export Types</h1>
+	<h1 class="main-title">Block Serializer Packager</h1>
+	<p class="description">JS by: Cloud Wolf</p>
+	<p class="description">CSS by: MightyCoderX</p> <br>
 
 	<div class="checkboxes">
 		<input type="checkbox" name="read" checked>
@@ -34,16 +36,16 @@
       	<p class="section-title">Custom Output Command</p>
       	<p class="description">$id = Block ID, $block = Block, <br> 
 		  $props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
+		<input type="checkbox" name="customOutputCK">
       	<input class="text-field" type="text" name="customOutput" value = "execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!">
-      	<input type="checkbox" name="customOutputCK">
 	</div>
 
     <div class="section">
       	<p class="section-title">Custom Input Command</p>
       	<p class="description">Same rules, can be used for instant action. <br> 
 		  Example, instantly converts block to sand</p>
+		  <input type="checkbox" name="customInputCK">
       	<input class="text-field" type="text" name="customInput" value = "execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}">
-      	<input type="checkbox" name="customInputCK">
 	</div>
 
     <button class="button" name="getZip" onclick="get_zip()" id="blob">Download Pack</button>
