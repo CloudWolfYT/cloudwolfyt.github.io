@@ -98,6 +98,7 @@ input[type="checkbox"]
     border-radius: 0.2rem;
     cursor: pointer;
     transition: 200ms;
+    margin: 20px 0;
 }
 
 .button:focus, .button:hover
