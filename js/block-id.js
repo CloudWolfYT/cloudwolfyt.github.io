@@ -7,7 +7,7 @@ function get_zip() {
   pbar.value = 0;
   //document.getElementById("pbarDiv").style = "visibility:shown";
   document.getElementsByName('getZip').checked = false;
-  get_jsons("./blocks.json");
+  get_jsons("../blocks.json");
 }
 function get_zip1() {
   var zip = new JSZip();
@@ -49,6 +49,7 @@ async function getDatapack(zip) {
 function get_jsons(block_list) { //transforms the blocks.json into a full length object
   fetch(block_list)
   .then(function(resp) {
+    console.log(resp);
     return resp.json();
   })
   .then(function(data) {
