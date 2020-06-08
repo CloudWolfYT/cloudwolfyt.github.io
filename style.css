@@ -81,12 +81,13 @@ input[type="checkbox"]
     color: white;
     font-size: 2.4vmin;
     background: #444;
-    transition: border-color 200ms;
+    transition: 200ms;
 }
 
 .text-field:focus
 {
     border-color: #0066ff;
+    background: none;
 }
 
 .button
@@ -105,9 +106,4 @@ input[type="checkbox"]
 .button:focus, .button:hover
 {
     background: #0066ff;
-}
-
-.progress-container
-{
-
 }
