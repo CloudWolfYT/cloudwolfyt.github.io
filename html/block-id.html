@@ -15,29 +15,29 @@
 
 <section class="main-section">
 	<h1 class="main-title">Block ID Packager</h1>
-	<p class="description">JS by: Cloud Wolf, CSS by: MightyCoderX</p>
+	<p class="description" style="font-size: 14px; margin-bottom: 20px;">JS by: Cloud Wolf, CSS by: MightyCoderX</p>
 
 	<div class="checkboxes">
-		<input type="checkbox" name="read" checked>
+		<input type="checkbox" class="checkbox" name="read" checked>
 		<label for="read">block -> score</label><br>
 
-		<input type="checkbox" name="opSetblock">
+		<input type="checkbox" class="checkbox" name="opSetblock">
 		<label for="opSetblock">setblock ~ ~ ~ $block</label><br>
 
-		<input type="checkbox" name="opFallBlock">
+		<input type="checkbox" class="checkbox" name="opFallBlock">
 		<label for="opFallBlock">summon falling_block ~ ~ ~ {Time:1,{$block}}</label><br>
 
-		<input type="checkbox" name="opMirrored">
+		<input type="checkbox" class="checkbox" name="opMirrored">
 		<label for="opMirrored">setblock ~ ~ ~ $block(but mirrored)</label><br>
 	</div>
 
     <div class="section">
 		<p class="section-title">Custom Output Command</p>
-      	<p class="description">$id = Block ID, $block = Block, <br> 
+      	<p class="description">$id = Block ID, $block = Block, <br>
 		  $props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
 		<label for="customOutputName">Branch Name:</label>
-		<input class="text-field" type="text" name="customOutputName" value = "custom_out" style="width:39%;"><br>
-		<input type="checkbox" name="customOutputCK">
+		<input class="text-field custom-name" type="text" name="customOutputName" value ="custom_out"><br>
+		<input type="checkbox" class="checkbox" name="customOutputCK">
       	<input class="text-field" type="text" name="customOutput" value = 'execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!'>
 	</div>
 
@@ -45,10 +45,10 @@
       	<p class="section-title">Custom Input Command</p>
       	<p class="description">Same rules, can be used for instant action. <br> 
 		  Example, instantly converts block to sand</p>
-		  <label for="customInputName">Branch Name:</label>
-		  <input class="text-field" type="text" name="customInputName" value = "custom_in" style="width:39%;"><br>
-		  <input type="checkbox" name="customInputCK">
-      	<input class="text-field" type="text" name="customInput" value = 'execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
+		<label for="customInputName">Branch Name:</label>
+		<input class="text-field custom-name" type="text" name="customInputName" value="custom_in"><br>
+		<input type="checkbox" class="checkbox" name="customInputCK">
+      	<input class="text-field" type="text" name="customInput" value='execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
 	</div>
 
     <button class="button" name="getZip" onclick="get_zip()" id="blob">Download Pack</button>
