@@ -1,0 +1,69 @@
+html, body
+{
+    background: var(--background-color);
+}
+
+html
+{
+    width: 100vw;
+    height: 100vh;
+}
+
+body
+{
+    padding: 10px 0 5px 0;
+    height: auto;
+    overflow-x: hidden;
+}
+
+.main-section
+{
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    color: white;
+    background: #333;
+    box-shadow: 0 10px 20px black;
+    padding: 10px 0 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: center;
+    width: 70%;
+}
+
+.main-title
+{
+    font-size: 6vmin;
+    text-align: center;
+    font-weight: 200;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.section
+{
+    width: 80%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-title
+{
+    font-weight: 300;
+    font-size: 3vmin;
+    margin-bottom: 10px;
+}
+
+.description
+{
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.text-field.custom-name
+{
+    width: 30%;
+    margin-bottom: 10px;
+}
