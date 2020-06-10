@@ -1,8 +1,3 @@
-html, body
-{
-    background: var(--background-color);
-}
-
 html
 {
     width: 100vw;

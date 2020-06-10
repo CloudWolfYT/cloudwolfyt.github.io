@@ -6,6 +6,11 @@
     font-family: sans-serif;
 }
 
+html, body
+{
+    background: var(--background-color);
+}
+
 :root
 {
     --background-color: #222;
