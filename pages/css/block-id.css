@@ -1,3 +1,5 @@
+@import "./general.css";
+
 html
 {
     width: 100vw;
@@ -25,7 +27,7 @@ body
     align-items: center;
     align-content: space-around;
     justify-content: center;
-    width: 70%;
+    width: 80%;
 }
 
 .main-title
@@ -35,6 +37,11 @@ body
     font-weight: 200;
     margin-bottom: 20px;
     margin-top: 10px;
+}
+
+.checkboxes
+{
+    margin-bottom: 20px;
 }
 
 .section

@@ -1,75 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/block-id.js" defer></script>
-    <script src="js/jszip.min.js" defer></script>
-    <script src="js/FileSaver.min.js" defer></script>
+	<head>
+    	<title>Block ID Packager</title>
 
-	<link rel="stylesheet" href="css/general.css">
-    <link href="css/block-id.css" rel="stylesheet" type="text/css">
-    
-    <title>Block ID Packager</title>
-</head>
-<body>
-	<div class="navbar">
-		<a href="../index.html">Home</a>
-		<div class="dropdown">
-			<button class="dropbtn">JS Scripts
-				<i class="fa fa-caret-down"></i>
-			</button>
-			<div class="dropdown-content">
-				<a href="block-id.html">Block ID Packager</a>
-				<a href="#">Script 2</a>
-				<a href="#">Script 3</a>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="js/block-id.js" defer></script>
+		<script src="js/jszip.min.js" defer></script>
+		<script src="js/FileSaver.min.js" defer></script>	
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/block-id.css">
+	</head>
+	<body>
+		<ul class="navbar">
+			<li><a href="../index.html">Home</a></li>
+			<li>
+				<div class="dropdown">
+					<button class="dropbtn">JS Scripts
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<a href="block-id.html">Block ID Packager</a>
+						<a href="#">Script 2</a>
+						<a href="#">Script 3</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+		<section class="main-section">
+			<h1 class="main-title">Block ID Packager</h1>
+			<p class="description" style="font-size: 14px; margin-bottom: 20px;">JS by: Cloud Wolf, CSS by: MightyCoderX</p>
+
+			<div class="checkboxes">
+				<input type="checkbox" class="checkbox" name="read" checked>
+				<label for="read">block -> score</label><br>
+
+				<input type="checkbox" class="checkbox" name="opSetblock">
+				<label for="opSetblock">setblock ~ ~ ~ $block</label><br>
+
+				<input type="checkbox" class="checkbox" name="opFallBlock">
+				<label for="opFallBlock">summon falling_block ~ ~ ~ {Time:1,{$block}}</label><br>
+
+				<input type="checkbox" class="checkbox" name="opMirrored">
+				<label for="opMirrored">setblock ~ ~ ~ $block(but mirrored)</label><br>
 			</div>
-		</div> 
-	</div>
 
-<section class="main-section">
-	<h1 class="main-title">Block ID Packager</h1>
-	<p class="description" style="font-size: 14px; margin-bottom: 20px;">JS by: Cloud Wolf, CSS by: MightyCoderX</p>
+			<div class="section">
+				<p class="section-title">Custom Output Command</p>
+				<p class="description">$id = Block ID, $block = Block, <br>
+				$props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
+				<label for="customOutputName">Branch Name:</label>
+				<input class="text-field custom-name" type="text" name="customOutputName" value ="custom_out"><br>
+				<input type="checkbox" class="checkbox" name="customOutputCK">
+				<input class="text-field" type="text" name="customOutput" value = 'execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!'>
+			</div>
 
-	<div class="checkboxes">
-		<input type="checkbox" class="checkbox" name="read" checked>
-		<label for="read">block -> score</label><br>
+			<div class="section">
+				<p class="section-title">Custom Input Command</p>
+				<p class="description">Same rules, can be used for instant action. <br> 
+				Example, instantly converts block to sand</p>
+				<label for="customInputName">Branch Name:</label>
+				<input class="text-field custom-name" type="text" name="customInputName" value="custom_in"><br>
+				<input type="checkbox" class="checkbox" name="customInputCK">
+				<input class="text-field" type="text" name="customInput" value='execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
+			</div>
 
-		<input type="checkbox" class="checkbox" name="opSetblock">
-		<label for="opSetblock">setblock ~ ~ ~ $block</label><br>
-
-		<input type="checkbox" class="checkbox" name="opFallBlock">
-		<label for="opFallBlock">summon falling_block ~ ~ ~ {Time:1,{$block}}</label><br>
-
-		<input type="checkbox" class="checkbox" name="opMirrored">
-		<label for="opMirrored">setblock ~ ~ ~ $block(but mirrored)</label><br>
-	</div>
-
-    <div class="section">
-		<p class="section-title">Custom Output Command</p>
-      	<p class="description">$id = Block ID, $block = Block, <br>
-		  $props = Properties(ie. east=true), $nprops = (ie. east:true)</p>
-		<label for="customOutputName">Branch Name:</label>
-		<input class="text-field custom-name" type="text" name="customOutputName" value ="custom_out"><br>
-		<input type="checkbox" class="checkbox" name="customOutputCK">
-      	<input class="text-field" type="text" name="customOutput" value = 'execute if score block bsc matches $id run say block is: $block[$props]{$nprops}!'>
-	</div>
-
-    <div class="section">
-      	<p class="section-title">Custom Input Command</p>
-      	<p class="description">Same rules, can be used for instant action. <br> 
-		  Example, instantly converts block to sand</p>
-		<label for="customInputName">Branch Name:</label>
-		<input class="text-field custom-name" type="text" name="customInputName" value="custom_in"><br>
-		<input type="checkbox" class="checkbox" name="customInputCK">
-      	<input class="text-field" type="text" name="customInput" value='execute if block ~ ~ ~ $block[$props] run summon falling_block ~ ~5 ~ {BlockState:{Name:"$block",Properties:{$nprops}},Time:1}'>
-	</div>
-
-    <button class="button" name="getZip" onclick="get_zip()" id="blob">Download Pack</button>
-    <div class="progress-container" id="pbarDiv" style="visibility:hidden">
-      	<label for="progress_bar">Downloading:</label>
-      	<progress id="progress_bar" value="0" max="100"> 0% </progress>
-    </div>
-</section>
-</body>
+			<button class="button" name="getZip" onclick="get_zip()" id="blob">Download Pack</button>
+			<div class="progress-container" id="pbarDiv" style="visibility:hidden">
+				<label for="progress_bar">Downloading:</label>
+				<progress id="progress_bar" value="0" max="100"> 0% </progress>
+			</div>
+		</section>
+	</body>
 </html>
