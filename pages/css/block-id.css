@@ -6,10 +6,12 @@ html
     height: 100vh;
 }
 
-body
+/*body
 {
-    background: var(--background-color);
-}
+    padding: 10px 0 5px 0;
+    height: auto;
+    overflow-x: hidden;
+}*/
 
 .main-section
 {
