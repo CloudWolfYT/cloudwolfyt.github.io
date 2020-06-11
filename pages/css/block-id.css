@@ -8,9 +8,7 @@ html
 
 body
 {
-    padding: 10px 0 5px 0;
-    height: auto;
-    overflow-x: hidden;
+    background: var(--background-color);
 }
 
 .main-section
