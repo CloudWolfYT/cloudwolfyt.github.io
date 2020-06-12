@@ -15,6 +15,10 @@
 html, body
 {
     background: var(--background-color);
+}
+
+html 
+{    
     background-color: #222;
 }
 
