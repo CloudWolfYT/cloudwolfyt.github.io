@@ -203,7 +203,8 @@ function parse_input(zip,tree,folder,command) {
       new_blocks.push("#bsc:l"+l+"_"+m);
       zip.file(["bsc/functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
       if(l==levels-1) {
-        zip.file(["bsc/functions/"+folder+".mcfunction"],"function bsc:"+folder+"/l"+l+"/l"+l+"_"+m);
+        var master = "data remove storage bsc nbt\nexecute if data block ~ ~ ~ {} run data modify storage bsc nbt set from block ~ ~ ~"
+        zip.file(["bsc/functions/"+folder+".mcfunction"],[master + "\nfunction bsc:"+folder+"/l"+l+"/l"+l+"_"+m]);
       }
       m++;
     }
