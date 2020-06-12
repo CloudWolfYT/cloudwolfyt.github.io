@@ -15,6 +15,7 @@
 html, body
 {
     background: var(--background-color);
+    background-color: #222;
 }
 
 .text-field
