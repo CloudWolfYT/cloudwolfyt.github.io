@@ -49,7 +49,6 @@ async function getDatapack(zip) {
 function get_jsons(block_list) { //transforms the blocks.json into a full length object
   fetch(block_list)
   .then(function(resp) {
-    console.log(resp);
     return resp.json();
   })
   .then(function(data) {
@@ -203,8 +202,7 @@ function parse_input(zip,tree,folder,command) {
       new_blocks.push("#bsc:l"+l+"_"+m);
       zip.file(["bsc/functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
       if(l==levels-1) {
-        var master = "data remove storage bsc nbt\nexecute if data block ~ ~ ~ {} run data modify storage bsc nbt set from block ~ ~ ~"
-        zip.file(["bsc/functions/"+folder+".mcfunction"],[master + "\nfunction bsc:"+folder+"/l"+l+"/l"+l+"_"+m]);
+        zip.file(["bsc/functions/"+folder+".mcfunction"],"data remove storage bsc nbt\nexecute if data block ~ ~ ~ {} run data modify storage bsc nbt set from block ~ ~ ~\nfunction bsc:"+folder+"/l"+l+"/l"+l+"_"+m);
       }
       m++;
     }
