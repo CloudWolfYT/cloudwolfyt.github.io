@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<title>Image to JSON Text</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="js/image-json.js" defer></script>
+		<script src="js/jszip.min.js" defer></script>
+		<script src="js/FileSaver.min.js" defer></script>	
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/navbar.css">
+		<link rel="stylesheet" href="css/block-id.css">
+		<style type="text/css" id="night-mode-pro-style">html {background-color: #222 !important;} body {background-color: #222;}</style>
+	</head>
+	<body>
+		<div class="navbar">
+			<a href="../index.html">Home</a>
+			<div class="dropdown">
+			  <button class="dropbtn">JS Scripts  
+				<i class="arrow down"></i>
+			  </button>
+			  <div class="dropdown-content">
+				<a href="block-id.html">Block ID Packager</a>
+				<a href="image-json.html">Image to JSON Text</a>
+				<a href="#">Link 3</a>
+			  </div>
+			</div> 
+		  </div>
+
+		<section class="main-section">
+			<h1 class="main-title">Image to JSON Text</h1>
+			<p class="description" style="font-size: 16px; margin-bottom: 20px;">By: Cloud Wolf</p>
+			<p class="description" style="font-size: 14px; margin-bottom: 20px;">Convert an image (.png) or video (.mp4) into json formatted text!</p>
+			
+				<label id="wtext" for="width">Width:</label>
+				<input class = "number-field custom-name" type="number" id="width" name="quantity" min="1" max="100" value = "16" size="2">
+				<label id="htext" for="height">Height:</label>
+				<input class = "number-field custom-name" type="number" id="height" name="quantity" min="1" max="100" value = "16" size="2">
+				<label id="ftext" for="height">FPS:</label>
+				<input class = "number-field custom-name" type="number" id="fps" name="quantity" min="1" max="100" value = "12" size="2">
+			<br>
+			<div>
+				<input type="radio" id="tellrawChoice"
+				 name="contact" value="/tellraw" checked = "checked">
+				<label for="tellrawChoice">/tellraw</label>
+				<br>
+				<input type="radio" id="hologramChoice"
+				 name="contact" value="hollowgram">
+				<label for="hologramChoice">Hollowgram</label>
+			  </div><br>
+			<input type="file" id="myFile" hidden="hidden"></input>
+			<button class = "button" type="button" id="uploadFile">Choose A File</button>
+			<p id="uploadText">No file chosen, yet.</p>
+			
+			<br>
+			<button class = "button" id="urmom" onclick="copy_text()">Download Txt</button>
+			<p id="output">0</p><br>
+		</section>
+	</body>
+</html>

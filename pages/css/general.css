@@ -37,6 +37,26 @@ html, body
     background: #0066ff33;
 }
 
+.number-field
+{
+    outline: none;
+    padding: 3px 5px;
+    width: 15%;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: 200ms;
+}
+
+.number-field:focus
+{
+    border-color: var(--accent-color);
+    background: #0066ff33;
+}
+
 .checkbox
 {
     position: relative;
