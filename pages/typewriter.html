@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<title>Block ID Packager</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="js/typewriter.js" defer></script>
+		<script src="js/libs/jszip.min.js" defer></script>
+		<script src="js/libs/FileSaver.min.js" defer></script>	
+		<script src="js/libs/highlight.min.js" defer></script>
+		<script src="js/libs/jquery.min.js" defer></script>
+        <script src="js/libs/katex.min.js" defer></script>
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/block-id.css">
+        <link rel="stylesheet" href="css/typewriter.css">
+		<style type="text/css" id="night-mode-pro-style">html {background-color: #222 !important;} body {background-color: #222;}</style>
+	</head>
+	<body>
+		<div class="navbar">
+			<a href="../index.html">Home</a>
+			<div class="dropdown">
+			  <button class="dropbtn">JS Scripts  
+				<i class="arrow down"></i>
+			  </button>
+			  <div class="dropdown-content">
+				<a href="block-id.html">Block ID Packager</a>
+				<a href="image-json.html">Image to JSON Text</a>
+                <a href="ender-crafter.html">Ender-Crafter Recipes</a>
+                <a href="typewriter.html">Typewriter Text</a>
+			  </div>
+			</div> 
+		  </div>
+
+		<section class="main-section">
+			<h1 class="main-title">Typewriter Text Generator</h1>
+            <p class="description" style="font-size: 14px; margin-bottom: 10px;">by: Cloud Wolf</p>
+            <button class="button" onclick='window.open("https://www.youtube.com/watch?v=uZSGm4V0Fq8")' id="blob">YT Video</button>
+            <br>
+            <div class = "toolbar" id="toolbar">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+                  <span class="ql-formats">
+                  
+                  <select class="ql-color" title="Colour">
+                    <option value="#aa0000" />
+                    <option value="#ff5555" />
+                    <option value="#ffaa00" />
+                    <option value="#ffff55" />
+                    <option value="#00aa00" />
+                    <option value="#55ff55" />
+                    <option value="#55ffff" />
+                    <option value="#00aaaa" />
+                    <option value="#0000aa" />
+                    <option value="#5555ff" />
+                    <option value="#ff55ff" />
+                    <option value="#aa00aa" />
+                    <option value="#ffffff" />
+                    <option value="#aaaaaa" />
+                    <option value="#555555" />
+                    <option value="#000000" />
+                  </select>
+                
+                </span>
+                <button id="selector">@</button>
+              </div><br>
+              <div id="editor-container">
+              </div>
+              <br>
+              <textarea class = "results" rows="50" cols="206" type="textbox" name="output"></textarea>
+        </section>
+	</body>
+</html>
