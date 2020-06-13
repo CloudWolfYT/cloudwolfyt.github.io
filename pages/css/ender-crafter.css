@@ -1,0 +1,49 @@
+.container {
+    width:690px; 
+    height: 310px;
+  }
+  
+  .first-box {
+    width:330px; 
+    float:left; 
+    height: 300px;
+    margin: 0px;
+
+    outline: none;
+    padding: 3px 5px;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: 200ms;
+  }
+  
+  .second-box {
+    width:330px; 
+    height: 300px; 
+    float:right; 
+    margin: 0px;
+
+    outline: none;
+    padding: 3px 5px;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: 200ms;
+  }
+  
+  .first-box:focus
+  {
+      border-color: var(--accent-color);
+      background: #0066ff33;
+  }
+  .second-box:focus
+  {
+      border-color: var(--accent-color);
+      background: #0066ff33;
+  }
