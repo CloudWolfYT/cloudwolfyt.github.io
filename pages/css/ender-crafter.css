@@ -1,12 +1,12 @@
 .container {
-    width:690px; 
-    height: 310px;
+    width:60%; 
+    height: 300px;
   }
   
   .first-box {
-    width:330px; 
+    width:48%; 
     float:left; 
-    height: 300px;
+    height: 100%;
     margin: 0px;
 
     outline: none;
@@ -21,8 +21,8 @@
   }
   
   .second-box {
-    width:330px; 
-    height: 300px; 
+    width:48%; 
+    height: 100%; 
     float:right; 
     margin: 0px;
 
