@@ -1,4 +1,5 @@
 
+@import "./general.css";
 #editor-container {
     height: 40px;
     width: 70%;

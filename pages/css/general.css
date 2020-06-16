@@ -2,6 +2,7 @@
 {
     --background-color: #222;
     --accent-color: #0066ff;
+    --error-color:  #ff1e00;
 }
 
 *, *::before, *::after
@@ -16,6 +17,8 @@ html, body
 {
     background: var(--background-color);
 }
+
+/* INTERACTABLE FIELDS */
 
 .text-field
 {
@@ -35,6 +38,12 @@ html, body
 {
     border-color: var(--accent-color);
     background: #0066ff33;
+}
+
+.text-field.custom-name
+{
+    width: 30%;
+    margin-bottom: 10px;
 }
 
 .number-field
@@ -101,7 +110,103 @@ html, body
     margin-bottom: 20px;
 }
 
+.button.error {
+    border: 2px solid white;
+}
+
 .button:focus, .button:hover
 {
     background: var(--accent-color);
 }
+
+.button.error:focus, .button.error:hover {
+    background: var(--error-color);
+}
+
+/* SECTIONS TEXTS */
+
+.main-section
+{
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    color: white;
+    background: #333;
+    box-shadow: 0 10px 20px black;
+    padding: 10px 0 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: center;
+    width: 80%;
+}
+
+.main-title
+{
+    font-size: 5vmin;
+    text-align: center;
+    font-weight: 200;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.section
+{
+    width: 80%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-title
+{
+    font-weight: 300;
+    font-size: 3vmin;
+    margin-bottom: 10px;
+}
+
+.description
+{
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* TOOLTIPS */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 240px;
+    background-color: var(--accent-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }

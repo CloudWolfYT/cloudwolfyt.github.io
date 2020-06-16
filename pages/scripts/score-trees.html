@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<title>Block ID Packager</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="../js/score-trees.js" defer></script>
+		<script src="../js/libs/jszip.min.js" defer></script>
+		<script src="../js/libs/FileSaver.min.js" defer></script>	
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/navbar.css">
+		<link rel="stylesheet" href="../css/general.css">
+		<style type="text/css" id="night-mode-pro-style">html {background-color: #222 !important;} body {background-color: #222;}</style>
+	</head>
+	<body>
+		<div class="navbar">
+			<a href="../../index.html">Home</a>
+			<div class="dropdown">
+			  <button class="dropbtn">JS Scripts  
+				<i class="arrow down"></i>
+			  </button>
+			  <div class="dropdown-content">
+				<a href="block-id.html">Block ID Packager</a>
+				<a href="image-json.html">Image to JSON Text</a>
+				<a href="ender-crafter.html">Ender-Crafter Recipes</a>
+				<a href="typewriter.html">Typewriter Text</a>
+				<a href="score-trees.html">Scoreboard Trees</a>
+			  </div>
+			</div> 
+		  </div>
+
+		<section class="main-section">
+			<h1 class="main-title">Scoreboard Trees</h1>
+			<button class="button error" onclick='this.blur()' id="blob">YT Video (Soon)</button>
+			<br>
+			
+
+			<div class="section">
+				<p class="section-title">Tree Settings</p>
+				<label for="customOutputName">Player: </label>
+				<input class="text-field" type="text" id="player" value = '@s', style='width:15%'>
+				<label for="customOutputName">Objective: </label>
+				<input class="text-field" type="text" id="objective" value = 'test', style='width:15%'><br>
+				<label for="customOutputName">Starting Point: </label>
+				<input class="text-field" type="text" id="start_pt" value = '0', style='width:6%'>
+				<label for="customOutputName">Elements: </label>
+				<input class="text-field" type="text" id="elements" value = '26', style='width:6%'>
+				<label for="customOutputName">Branches: </label>
+				<input class="text-field" type="text" id="branches" value = '2', style='width:6%'><br>
+				<input type="checkbox" class="checkbox" id="fold">
+				<div class = "tooltip">
+					<label for="fold">Fold Results?</label>
+					<span class="tooltiptext">If checked, last level of tree contains (branches) amount of values. You will need to discern which is which.</span>
+				</div><br>
+				<label for="customOutputName">Namespace: </label>
+				<input class="text-field" type="text" id="namespace" value = 'score_trees', style='width:30%'><br>
+				<label for="customOutputName">Folder: </label>
+				<input class="text-field" type="text" id="folder" value = 'test_tree', style='width:45%'>
+			</div>
+<br><br>
+			<div class="section">
+				<p class="section-title">Output Command(s)</p>
+				<p class="description">Variables: $score = scoreboard value</p>
+				<p class="description"> $objective = objective name</p>
+				<textarea class="text-field custom-name" type="text" id="output" style='width:50%; height:200px'>say hi @a[scores={$objective=$score}]</textarea><br>
+				</div>
+
+			<button class="button" name="getZip" onclick="this.blur(); get_zip()" id="blob">Download Tree</button>
+			<div class="progress-container" id="pbarDiv" style="visibility:hidden">
+				<label for="progress_bar">Downloading:</label>
+				<progress id="progress_bar" value="0" max="100"> 0% </progress>
+			</div>
+		</section>
+	</body>
+</html>

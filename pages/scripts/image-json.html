@@ -6,18 +6,18 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<script src="js/image-json.js" defer></script>
-		<script src="js/libs/jszip.min.js" defer></script>
-		<script src="js/libs/FileSaver.min.js" defer></script>	
+		<script src="../js/image-json.js" defer></script>
+		<script src="../js/libs/jszip.min.js" defer></script>
+		<script src="../js/libs/FileSaver.min.js" defer></script>	
 
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/navbar.css">
-		<link rel="stylesheet" href="css/block-id.css">
+		<link rel="stylesheet" href="../css/navbar.css">
+		<link rel="stylesheet" href="../css/general.css">
 		<style type="text/css" id="night-mode-pro-style">html {background-color: #222 !important;} body {background-color: #222;}</style>
 	</head>
 	<body>
 		<div class="navbar">
-			<a href="../index.html">Home</a>
+			<a href="../../index.html">Home</a>
 			<div class="dropdown">
 			  <button class="dropbtn">JS Scripts  
 				<i class="arrow down"></i>
@@ -27,15 +27,15 @@
 				<a href="image-json.html">Image to JSON Text</a>
 				<a href="ender-crafter.html">Ender-Crafter Recipes</a>
 				<a href="typewriter.html">Typewriter Text</a>
+				<a href="score-trees.html">Scoreboard Trees</a>
 			  </div>
 			</div> 
 		  </div>
 
 		<section class="main-section">
 			<h1 class="main-title">Image to JSON Text</h1>
-			<p class="description" style="font-size: 16px; margin-bottom: 10px;">By: Cloud Wolf</p>
 			<p class="description" style="font-size: 14px; margin-bottom: 10px;">Convert an image (.png) or video (.mp4) into json formatted text!</p>
-			<button class="button" onclick='window.open("https://www.youtube.com/watch?v=VVCt690iiQ4")' id="blob">YT Video</button>
+			<button class="button" onclick='this.blur(); window.open("https://www.youtube.com/watch?v=VVCt690iiQ4")' id="blob">YT Video</button>
             <br>
 				<label id="wtext" for="width">Width:</label>
 				<input class = "number-field custom-name" type="number" id="width" name="quantity" min="1" max="100" value = "16" size="2">
@@ -58,7 +58,7 @@
 			<p id="uploadText">No file chosen, yet.</p>
 			
 			<br>
-			<button class = "button" id="urmom" onclick="copy_text()">Download Txt</button>
+			<button class = "button" id="urmom" onclick="this.blur(); copy_text()">Download Txt</button>
 			<p id="output">0</p><br>
 		</section>
 	</body>
