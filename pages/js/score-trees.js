@@ -71,7 +71,7 @@ function parse_output(zip,tree,folder,command,length,start_pt,namespace,player,o
         }
         new_numLine.push(numLine[i]);
         zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
-        if(l==levels-1) {
+        if(l==levels) {
           zip.file(["functions/"+folder+".mcfunction"],"function "+namespace+":"+folder+"/l"+l+"/l"+l+"_"+m);
         }
       }

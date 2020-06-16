@@ -53,7 +53,7 @@
 				<p class="section-title">Output Command(s)</p>
 				<p class="description">Variables: $score = scoreboard value</p>
 				<p class="description"> $objective = objective name</p>
-				<textarea class="text-field custom-name" type="text" id="output" style='width:50%; height:200px'>say hi @a[scores={$objective=$score}]</textarea><br>
+				<textarea class="text-field custom-name" type="text" id="output" style='width:50%; height:200px'>tellraw @a[scores={$objective=$score}] {"text":"$score","color":"green"}</textarea><br>
 				</div>
 
 			<button class="button" name="getZip" onclick="this.blur(); get_zip()" id="blob">Download Tree</button>
