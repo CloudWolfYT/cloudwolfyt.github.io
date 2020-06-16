@@ -10,9 +10,7 @@ $(function () {
     bar += '<a href="ender-crafter.html">Ender-Crafter Recipes</a>';
     bar += '<a href="typewriter.html">Typewriter Text</a>';
     bar += '<a href="score-trees.html">Scoreboard Trees</a>';
-    bar += '</div>';
-    bar += '</div>';
-    bar += '</nav>';
+    bar += '</div></div></div>';
 
     $("#main-bar").html(bar);
 
