@@ -2,7 +2,7 @@ $(function () {
     var bar = '';
     bar += '<div class="navbar">';
     bar += '<a href="../../index.html">Home</a>';
-    bar += '<a href="../downloads/downloads.html">Downloads</a>';
+    bar += '<a href="../downloads.html">Downloads</a>';
     bar += '<div class="dropdown">';
     bar += '<button class="dropbtn">JS Scripts <i class="arrow down"></i></button>';
     bar += '<div class="dropdown-content">';
