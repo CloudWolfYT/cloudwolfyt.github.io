@@ -6,11 +6,11 @@ $(function () {
     bar += '<div class="dropdown">';
     bar += '<button class="dropbtn">JS Scripts <i class="arrow down"></i></button>';
     bar += '<div class="dropdown-content">';
-    bar += '<a href="block-id.html">Block ID Packager</a>';
-    bar += '<a href="image-json.html">Image to JSON Text</a>';
-    bar += '<a href="ender-crafter.html">Ender-Crafter Recipes</a>';
-    bar += '<a href="typewriter.html">Typewriter Text</a>';
-    bar += '<a href="score-trees.html">Scoreboard Trees</a>';
+    bar += '<a href="../scripts/block-id.html">Block ID Packager</a>';
+    bar += '<a href="../scripts/image-json.html">Image to JSON Text</a>';
+    bar += '<a href="../scripts/ender-crafter.html">Ender-Crafter Recipes</a>';
+    bar += '<a href="../scripts/typewriter.html">Typewriter Text</a>';
+    bar += '<a href="../scripts/score-trees.html">Scoreboard Trees</a>';
     bar += '</div></div></div>';
 
     $("#main-bar").html(bar);
