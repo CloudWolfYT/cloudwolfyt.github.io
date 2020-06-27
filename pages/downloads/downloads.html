@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<title>Downloads</title>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="../js/downloads.js" defer></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/navbar.css">
+		<link rel="stylesheet" href="../css/general.css">
+		<link rel="stylesheet" href="../css/downloads.css">
+		<style type="text/css" id="night-mode-pro-style">html {background-color: #222 !important;} body {background-color: #222;}</style>
+	</head>
+	<body>
+		<div id="main-bar"></div>
+		<script src="../js/libs/jquery.min.js"></script>
+	 	<script src="../js/navbar.js?id=index" id="nav-bar"></script>
+
+		<section class="main-section">
+			<h1 class="main-title">Downloads</h1>
+			<p class="description" style="font-size: 18px; margin-bottom: 10px;">A list of github datapacks, with versioning.</p>
+			<p class="description" style="font-size: 18px; margin-bottom: 10px;">Message me if you want one updated that isn't.</p>
+			<br>
+			<div class="section">
+				<div class = "download-section">
+					<a href="https://api.github.com/repos/cloudwolfyt/ender_craft/zipball/master"
+					class="button" onclick="this.blur();" id="dl_link">Download</a>
+					<span class="section-title">Ender Crafter</span>
+					<span class="description">An nbt crafter using an enderchest!</span>
+					<select class="select" onchange="this.blur(); change_link(this);">
+						<option value="ender_craft/zipball/master">1.15</option>
+					</select>
+				</div>
+				<div class = "download-section">
+					<a href="https://api.github.com/repos/cloudwolfyt/tamed_wolf/zipball/master"
+					class="button" onclick="this.blur();" id="dl_link">Download</a>
+					<span class="section-title">Tamed Wolf</span>
+					<span class="description">Summon a wolf tamed by @s</span>
+					<select class="select" onchange="this.blur(); change_link(this);">
+						<option value="tamed_wolf/zipball/master">1.16</option>
+						<option value="tamed_wolf/zipball/1.15">1.15</option>
+					</select>
+				</div><br><br><br>
+			</div>
+		</section>
+	</body>
+</html>

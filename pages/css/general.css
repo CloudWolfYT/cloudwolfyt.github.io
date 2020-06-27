@@ -123,6 +123,23 @@ html, body
     background: var(--error-color);
 }
 
+.select
+{
+    padding: 10px 20px;
+    color: white;
+    border: 2px solid var(--accent-color);
+    outline: none;
+    background: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: 200ms;
+    margin: 0px 20px 20px 20px;
+}
+.select:focus, .select:hover
+{
+    background: var(--background-color);
+}
+
 /* SECTIONS TEXTS */
 
 .main-section
@@ -162,13 +179,33 @@ html, body
 {
     font-weight: 300;
     font-size: 3vmin;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.download-section
+{
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    color: white;
+    background: rgb(71, 71, 71);
+    box-shadow: 0 1px 2px black;
+    padding: 20px 0 0px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-between;
+    width: 80%;
     margin-bottom: 10px;
 }
 
 .description
 {
     font-style: italic;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-left: 15px;
 }
 
 /* TOOLTIPS */
