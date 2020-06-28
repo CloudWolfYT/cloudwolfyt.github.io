@@ -183,24 +183,6 @@ html, body
     margin-left: 20px;
 }
 
-.download-section
-{
-    position: relative;
-    transform: translateX(-50%);
-    left: 50%;
-    color: white;
-    background: rgb(71, 71, 71);
-    box-shadow: 0 1px 2px black;
-    padding: 20px 0 0px 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: space-around;
-    justify-content: space-between;
-    width: 80%;
-    margin-bottom: 10px;
-}
-
 .description
 {
     font-style: italic;

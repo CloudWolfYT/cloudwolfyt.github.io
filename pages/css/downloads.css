@@ -1,0 +1,40 @@
+
+.inner-title
+{
+    font-weight: 300;
+    font-size: 2.5vmin;
+    margin-bottom: 20px;
+    margin-left: 20px;
+
+}
+
+.download-section
+{
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    color: white;
+    background: rgb(71, 71, 71);
+    box-shadow: 0 1px 2px black;
+    padding: 20px 0 0px 15px;
+    width: 80%;
+    margin-bottom: 10px;
+    align-items: center;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 1fr;
+    gap: 10px;
+    justify-items: center;
+}
+
+.downloads-container {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 10px;
+    width: 80%;
+    height: max-content;
+  }
+  
+  .download-section > span {
+    justify-self: left;
+  }
