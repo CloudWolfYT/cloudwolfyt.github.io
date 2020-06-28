@@ -31,7 +31,7 @@
     display: grid;
     grid-auto-flow: row;
     gap: 10px;
-    width: 80%;
+    width: 100%;
     height: max-content;
   }
   
