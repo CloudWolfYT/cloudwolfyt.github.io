@@ -7,7 +7,7 @@ function get_zip() {
   pbar.value = 0;
   //document.getElementById("pbarDiv").style = "visibility:shown";
   document.getElementsByName('getZip').checked = false;
-  get_jsons("../blocks.json");
+  get_jsons("../json/1.15/blocks.json");
 }
 function get_zip1() {
   var zip = new JSZip();
