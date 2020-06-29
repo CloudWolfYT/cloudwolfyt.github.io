@@ -1,13 +1,14 @@
 var all_blocks = [];
 var blocks = [];
-var tree = 2;
+var branches = document.getElementsByName('treeSize');
 var pbar = document.getElementById("progress_bar");
 var versioner = document.getElementsByName('versions');
+var tree = 2;
 
 function get_zip() {
   pbar.value = 0;
   //document.getElementById("pbarDiv").style = "visibility:shown";
-  tree = document.getElementsByName('treeSize').value;
+  tree = parseInt(branches[0].value);
   document.getElementsByName('getZip').checked = false;
   get_jsons("../json/"+versioner[0].value+"/blocks.json");
 }
