@@ -15,7 +15,7 @@ $(function () {
     bar += '<div class="dropdown">';
     bar += '<button class="dropbtn">Programs <i class="arrow down"></i></button>';
     bar += '<div class="dropdown-content">';
-    bar += '<a href="../programs/particle-grapher.html">Particle Grapher</a>';
+    bar += '<a href="../programs/particle-plots.html">Particle Plots</a>';
     bar += '</div></div></div>';
 
     $("#main-bar").html(bar);
