@@ -3,6 +3,7 @@
     --background-color: #222;
     --accent-color: #0066ff;
     --error-color:  #ff1e00;
+    overflow-x: hidden;
 }
 
 *, *::before, *::after
@@ -32,6 +33,10 @@ html, body
     font-size: 2.4vmin;
     background: #444;
     transition: 200ms;
+}
+
+.text-field.hidden {
+    display: none;
 }
 
 .text-field:focus
@@ -133,11 +138,14 @@ html, body
     border-radius: 0.2rem;
     cursor: pointer;
     transition: 200ms;
-    margin: 0px 20px 20px 20px;
+    margin-bottom: 20px;
 }
 .select:focus, .select:hover
 {
     background: var(--background-color);
+}
+
+.slider {
 }
 
 /* SECTIONS TEXTS */

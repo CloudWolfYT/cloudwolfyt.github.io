@@ -1,0 +1,75 @@
+<head>
+	<!-- Load plotly.js into the DOM -->
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <!-- Load math.js into the DOM -->
+    <script src="https://unpkg.com/mathjs@7.1.0/dist/math.min.js"></script>
+    <script src="../js/particle-grapher.js" defer></script>
+    <script src="../js/libs/jszip.min.js" defer></script>
+	<script src="../js/libs/FileSaver.min.js" defer></script>	
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../css/navbar.css">
+	<link rel="stylesheet" href="../css/block-id.css">
+    <style type="text/css" id="night-mode-pro-style">html {background-color: #222 !important;} body {background-color: #222;}</style>
+</head>
+
+<body>    
+    <div id="main-bar"></div>
+    <script src="../js/libs/jquery.min.js"></script>
+     <script src="../js/navbar.js?id=index" id="nav-bar"></script>
+
+    <section class="main-section">
+        <h1 class="main-title">Particle Grapher</h1>
+        <button class="button error" onclick='this.blur(); window.open("")' id="blob">YT Video</button>
+        <br>
+
+        <form oninput="result.value=parseInt(time_scale.value)" class = "section">
+            <label for="time_min">Time Min:</label>
+            <input type="number" min=-50 max= 50 value="0" class = "text-field" id = "time_min", style='width:6%'>
+            <label for="time_max">Time Max:</label>
+            <input type="number" min=-50 max= 50 value="20" class = "text-field" id = "time_max", style='width:6%'>
+            <label for="time_scale">Points:</label>
+            <input type="range" min=0 max= 1000 value="100" class = "slider" id = "time_scale">
+            <output name="result" for="time">100</output>
+          </form>
+
+        <section id="equations" class="section">
+            <label for="x1">X:</label>
+            <input type="text" id="x1" class = "text-field" value="t" /><br>
+            <label for="y1">Y:</label>
+            <input type="text" id="y1" class = "text-field" value="t*cos(t)" /><br>
+            <label for="z1">Z:</label>
+            <input type="text" id="z1" class = "text-field" value="t*sin(t)" /><br><br>
+            <input type="button" class = "button" value="Draw" onclick='this.blur(); event.preventDefault(); draw();'>
+            <select id="particle" class="select" onchange="this.blur(); particle_handler();", style='width:13%'>
+                <option value="ambient_entity_effect">Ambient Entity Effect</option><option value="angry_villager">Angry Villager</option><option value="ash">Ash</option>
+                <option value="barrier">Barrier</option><option value="block">Block</option><option value="bubble">Bubble</option>
+                <option value="bubble_pop">Bubble Pop</option><option value="bubble_column_up">Bubble Column Up</option><option value="campfire_cosy_smoke">Campfire Cosy Smoke</option>
+                <option value="campfire_signal_smoke">Campfire Signal Smoke</option><option value="cloud">Cloud</option><option value="composter">Composter</option>
+                <option value="crimson_spore">Crimson Spore</option><option value="crit">Crit</option><option value="current_down">Current Down</option>
+                <option value="damage_indicator">Damage Indicator</option><option value="dolphin">Dolphin</option><option value="dragon_breath">Dragon Breath</option>
+                <option value="dripping_lava">Dripping Lava</option><option value="dripping_obsidian_tear">Dripping Obsidian Tear</option><option value="dripping_water">Dripping Water</option>
+                <option value="dust">Dust</option><option value="effect">Effect</option><option value="elder_guardian">Elder Guardian</option>
+                <option value="enchant">Enchant</option><option value="enchanted_hit">Enchanted Hit</option><option value="end_rod">End Rod</option>
+                <option value="entity_effect">Entity Effect</option><option value="explosion_emitter">Explosion Emitter</option><option value="explosion">Explosion</option>
+                <option value="falling_dust">Falling Dust</option><option value="falling_lava">Falling Lava</option><option value="falling_obsidian_tear">Falling Obsidian Tear</option>
+                <option value="falling_water">Falling Water</option><option value="firework">Firework</option><option value="fishing">Fishing</option>
+                <option value="flame" selected="selected">Flame</option><option value="flash">Flash</option><option value="happy_villager">Happy Villager</option>
+                <option value="heart">Heart</option><option value="instant_effect">Instant Effect</option><option value="item">Item</option>
+                <option value="item_slime">Item Slime</option><option value="item_snowball">Item Snowball</option><option value="landing_lava">Landing Lava</option>
+                <option value="landing_obsidian_tear">Landing Obsidian Tear</option><option value="large_smoke">Large Smoke</option><option value="lava">Lava</option>
+                <option value="mycelium">Mycelium</option><option value="nautilus">Nautilus</option><option value="note">Note</option>
+                <option value="poof">Poof</option><option value="portal">Portal</option><option value="rain">Rain</option>
+                <option value="smoke">Smoke</option><option value="sneeze">Sneeze</option><option value="soul">Soul</option>
+                <option value="soul_fire_flame">Soul Fire Flame</option><option value="spit">Spit</option><option value="splash">Splash</option>
+                <option value="squid_ink">Squid Ink</option><option value="sweep_attack">Sweep Attack</option><option value="totem_of_undying">Totem of Undying</option>
+                <option value="underwater">Underwater</option><option value="warped_spore">Warped Spore</option><option value="witch">Witch</option>
+            </select>
+            <input type="text" class = "text-field hidden" id = "particle_extras", style='width:15%'>
+            <input type="text" class = "text-field" id = "particle_closer", style='width:17%' value = "0 0 0 0 1 force @a">
+            <input type="button" class = "button" value="Export" onclick='this.blur(); exports();'>
+        </section>
+          
+        <div id='plot' class="section"><!-- Plotly chart will be drawn inside this DIV --></div>
+    </section>
+</body>
