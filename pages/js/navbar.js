@@ -12,11 +12,6 @@ $(function () {
     bar += '<a href="../gens/image-json.html">Image to JSON Text</a>';
     bar += '<a href="../gens/ender-crafter.html">Ender-Crafter Recipes</a>';
     bar += '<a href="../gens/typewriter.html">Typewriter Text</a>';
-    // bar += '</div></div>';
-    // bar += '<div class="dropdown">';
-    // bar += '<button class="dropbtn">Programs <i class="arrow down"></i></button>';
-    // bar += '<div class="dropdown-content">';
-    // bar += '<a href="../programs/particle-plots.html">Particle Plots</a>';
     bar += '</div></div></div>';
 
     $("#main-bar").html(bar);
