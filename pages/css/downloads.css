@@ -17,12 +17,12 @@
     background: rgb(71, 71, 71);
     box-shadow: 0 1px 2px black;
     padding: 20px 0 0px 15px;
-    width: 60%;
+    width: 80%;
     margin-bottom: 10px;
     align-items: center;
 
     display: grid;
-    grid-template-columns: 2fr 3fr 6fr 2fr;
+    grid-template-columns: 2fr 3fr 6fr 2fr 2fr;
     gap: 10px;
     justify-items: center;
 }
