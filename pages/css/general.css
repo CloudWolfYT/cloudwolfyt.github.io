@@ -183,6 +183,15 @@ html, body
     text-align: center;
 }
 
+.section.settings
+{
+    background: rgb(73, 73, 73);
+    width: 50%;
+    margin-bottom: 20px;
+    display: none;
+    text-align: center;
+}
+
 .section-title
 {
     font-weight: 300;

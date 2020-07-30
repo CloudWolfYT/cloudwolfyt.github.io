@@ -36,44 +36,59 @@
             <input type="number" min=-50 max= 50 value="20" class = "text-field" id = "time_max", style='width:6%'>
             <label for="time_scale">Points:</label>
             <input type="range" min=0 max= 1000 value="100" class = "slider" id = "time_scale">
-            <output name="result" for="time">100</output>
+            <output id = "time_result" name="result" for="time">100</output>
           </form>
 
         <section id="equations" class="section">
             <label for="x1">X:</label>
-            <input type="text" id="x1" class = "text-field" value="t" /><br>
+            <input type="text" id="x1" class = "text-field" value="t*sin(t)" /><br>
             <label for="y1">Y:</label>
             <input type="text" id="y1" class = "text-field" value="t*cos(t)" /><br>
             <label for="z1">Z:</label>
-            <input type="text" id="z1" class = "text-field" value="t*sin(t)" /><br><br>
-            <input type="button" class = "button" value="Draw" onclick='this.blur(); event.preventDefault(); draw();'>
-            <select id="particle" class="select" onchange="this.blur(); particle_handler();", style='width:13%'>
-                <option value="ambient_entity_effect">Ambient Entity Effect</option><option value="angry_villager">Angry Villager</option><option value="ash">Ash</option>
-                <option value="barrier">Barrier</option><option value="block">Block</option><option value="bubble">Bubble</option>
-                <option value="bubble_pop">Bubble Pop</option><option value="bubble_column_up">Bubble Column Up</option><option value="campfire_cosy_smoke">Campfire Cosy Smoke</option>
-                <option value="campfire_signal_smoke">Campfire Signal Smoke</option><option value="cloud">Cloud</option><option value="composter">Composter</option>
-                <option value="crimson_spore">Crimson Spore</option><option value="crit">Crit</option><option value="current_down">Current Down</option>
-                <option value="damage_indicator">Damage Indicator</option><option value="dolphin">Dolphin</option><option value="dragon_breath">Dragon Breath</option>
-                <option value="dripping_lava">Dripping Lava</option><option value="dripping_obsidian_tear">Dripping Obsidian Tear</option><option value="dripping_water">Dripping Water</option>
-                <option value="dust">Dust</option><option value="effect">Effect</option><option value="elder_guardian">Elder Guardian</option>
-                <option value="enchant">Enchant</option><option value="enchanted_hit">Enchanted Hit</option><option value="end_rod">End Rod</option>
-                <option value="entity_effect">Entity Effect</option><option value="explosion_emitter">Explosion Emitter</option><option value="explosion">Explosion</option>
-                <option value="falling_dust">Falling Dust</option><option value="falling_lava">Falling Lava</option><option value="falling_obsidian_tear">Falling Obsidian Tear</option>
-                <option value="falling_water">Falling Water</option><option value="firework">Firework</option><option value="fishing">Fishing</option>
-                <option value="flame" selected="selected">Flame</option><option value="flash">Flash</option><option value="happy_villager">Happy Villager</option>
-                <option value="heart">Heart</option><option value="instant_effect">Instant Effect</option><option value="item">Item</option>
-                <option value="item_slime">Item Slime</option><option value="item_snowball">Item Snowball</option><option value="landing_lava">Landing Lava</option>
-                <option value="landing_obsidian_tear">Landing Obsidian Tear</option><option value="large_smoke">Large Smoke</option><option value="lava">Lava</option>
-                <option value="mycelium">Mycelium</option><option value="nautilus">Nautilus</option><option value="note">Note</option>
-                <option value="poof">Poof</option><option value="portal">Portal</option><option value="rain">Rain</option>
-                <option value="smoke">Smoke</option><option value="sneeze">Sneeze</option><option value="soul">Soul</option>
-                <option value="soul_fire_flame">Soul Fire Flame</option><option value="spit">Spit</option><option value="splash">Splash</option>
-                <option value="squid_ink">Squid Ink</option><option value="sweep_attack">Sweep Attack</option><option value="totem_of_undying">Totem of Undying</option>
-                <option value="underwater">Underwater</option><option value="warped_spore">Warped Spore</option><option value="witch">Witch</option>
+            <input type="text" id="z1" class = "text-field" value="t" /><br><br>
+            <select id="presets" class="select" onchange="this.blur(); preset_handler();", style='width:20%'>
+                <option value="conic_spiral">Conic Spiral</option>
+                <option value="cylindric_spiral">Cylindric Spiral</option>
+                <option value="sphere">Sphere</option>
             </select>
-            <input type="text" class = "text-field hidden" id = "particle_extras", style='width:15%'>
-            <input type="text" class = "text-field" id = "particle_closer", style='width:17%' value = "0 0 0 0 1 force @a">
+            <input type="button" class = "button" value="Draw" onclick='this.blur(); event.preventDefault(); draw();'>
+            <input type="button" class = "button" value="Settings" onclick='this.blur(); settings_toggle();'>
             <input type="button" class = "button" value="Export" onclick='this.blur(); exports();'>
+        </section>
+        <section id = "settings" class="section settings"><br>
+            <div id = "particle-settings">
+                <select id="particle" class="select" onchange="this.blur(); particle_handler();", style='width:20%'>
+                    <option value="ambient_entity_effect">Ambient Entity Effect</option><option value="angry_villager">Angry Villager</option><option value="ash">Ash</option>
+                    <option value="barrier">Barrier</option><option value="block">Block</option><option value="bubble">Bubble</option>
+                    <option value="bubble_pop">Bubble Pop</option><option value="bubble_column_up">Bubble Column Up</option><option value="campfire_cosy_smoke">Campfire Cosy Smoke</option>
+                    <option value="campfire_signal_smoke">Campfire Signal Smoke</option><option value="cloud">Cloud</option><option value="composter">Composter</option>
+                    <option value="crimson_spore">Crimson Spore</option><option value="crit">Crit</option><option value="current_down">Current Down</option>
+                    <option value="damage_indicator">Damage Indicator</option><option value="dolphin">Dolphin</option><option value="dragon_breath">Dragon Breath</option>
+                    <option value="dripping_lava">Dripping Lava</option><option value="dripping_obsidian_tear">Dripping Obsidian Tear</option><option value="dripping_water">Dripping Water</option>
+                    <option value="dust">Dust</option><option value="effect">Effect</option><option value="elder_guardian">Elder Guardian</option>
+                    <option value="enchant">Enchant</option><option value="enchanted_hit">Enchanted Hit</option><option value="end_rod">End Rod</option>
+                    <option value="entity_effect">Entity Effect</option><option value="explosion_emitter">Explosion Emitter</option><option value="explosion">Explosion</option>
+                    <option value="falling_dust">Falling Dust</option><option value="falling_lava">Falling Lava</option><option value="falling_obsidian_tear">Falling Obsidian Tear</option>
+                    <option value="falling_water">Falling Water</option><option value="firework">Firework</option><option value="fishing">Fishing</option>
+                    <option value="flame" selected="selected">Flame</option><option value="flash">Flash</option><option value="happy_villager">Happy Villager</option>
+                    <option value="heart">Heart</option><option value="instant_effect">Instant Effect</option><option value="item">Item</option>
+                    <option value="item_slime">Item Slime</option><option value="item_snowball">Item Snowball</option><option value="landing_lava">Landing Lava</option>
+                    <option value="landing_obsidian_tear">Landing Obsidian Tear</option><option value="large_smoke">Large Smoke</option><option value="lava">Lava</option>
+                    <option value="mycelium">Mycelium</option><option value="nautilus">Nautilus</option><option value="note">Note</option>
+                    <option value="poof">Poof</option><option value="portal">Portal</option><option value="rain">Rain</option>
+                    <option value="smoke">Smoke</option><option value="sneeze">Sneeze</option><option value="soul">Soul</option>
+                    <option value="soul_fire_flame">Soul Fire Flame</option><option value="spit">Spit</option><option value="splash">Splash</option>
+                    <option value="squid_ink">Squid Ink</option><option value="sweep_attack">Sweep Attack</option><option value="totem_of_undying">Totem of Undying</option>
+                    <option value="underwater">Underwater</option><option value="warped_spore">Warped Spore</option><option value="witch">Witch</option>
+                </select>
+                <input type="text" class = "text-field hidden" id = "particle_extras", style='width:30%'>
+                <input type="text" class = "text-field" id = "particle_closer", style='width:40%' value = "0 0 0 0 1 force @a">
+            </div>
+            <form oninput="result.value=parseFloat(opacity.value/100).toFixed(1)" class = "section">
+                <label for="opacity">Marker Opacity:</label>
+                <input type="range" min=10 max= 100 value="80" class = "slider" id = "opacity" step = 10>
+                <output name="result" for="opacity">0.8</output>
+              </form>
         </section>
           
         <div id='plot' class="section"><!-- Plotly chart will be drawn inside this DIV --></div><br><br><br>
