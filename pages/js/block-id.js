@@ -104,6 +104,7 @@ function block_tags(zip,tree) {
     temp_blocks = new_blocks;
   }
 }
+
 function parse_output(zip,tree,folder,command) {
   var temp_blocks = blocks;
   var levels = Math.ceil(Math.log(blocks.length)/Math.log(tree));
@@ -115,6 +116,8 @@ function parse_output(zip,tree,folder,command) {
   for(var i = 0; i < length; i+=(tree)) {
     var ins = "";
       for(var j = 0; j < tree; j++) {
+        var ins1 = "";
+        var property_flag = 0;
         if(l==0 && typeof temp_blocks[i+j] != 'undefined') {
           var props = all_blocks.filter(obj => {
             return obj.block === temp_blocks[i+j];
@@ -132,10 +135,32 @@ function parse_output(zip,tree,folder,command) {
               }
               prop_list = prop_list.substring(0, prop_list.length - 1);
               prop_list1 = prop_list1.substring(0, prop_list1.length - 1);
+
+              demo = demo.replace(/\$props/g,prop_list);
+              ins1 = ins1.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
+              property_flag = 1;
+              if(u==0) {
+                var current = all_blocks.filter(obj => {
+                  return obj.block === temp_blocks[i-tree+1+j+1];
+                })
+                var next = all_blocks.filter(obj => {
+                  return obj.block === temp_blocks[i-tree+1+j+1+1];
+                })
+                if(current[0] && next[0]) {
+                  ins = ins.concat("execute if score block bsc matches "+current[0].id+".."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");
+                } else if(current[0] && !next[0]) {
+                  ins = ins.concat("execute if score block bsc matches "+current[0].id+".. run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");
+                } else if(!current[0] && next[0]) {
+                  ins = ins.concat("execute if score block bsc matches .."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");   
+                }
+              }
+            } else {
+              demo = demo.replace(/\$props/g,prop_list);
+              ins = ins.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
             }
-            demo = demo.replace(/\$props/g,prop_list);
-            ins = ins.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
           }
+          if(property_flag)
+            zip.file(["bsc/functions/"+folder+"/l"+l+"/p/l"+l+"_"+parseInt(i+j)+".mcfunction"],ins1);
         } else if(typeof temp_blocks[i+j] != 'undefined') {
           var current = all_blocks.filter(obj => {
             return obj.block === temp_blocks[i-tree+1+j+1];
@@ -143,16 +168,12 @@ function parse_output(zip,tree,folder,command) {
           var next = all_blocks.filter(obj => {
             return obj.block === temp_blocks[i-tree+1+j+1+1];
           })
-          if(i+j>0) {
           if(current[0] && next[0]) {
             ins = ins.concat("execute if score block bsc matches "+current[0].id+".."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-            } else if(current[0] && !next[0]) {
-              ins = ins.concat("execute if score block bsc matches "+current[0].id+".. run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-            } else if(!current[0] && next[0]) {
-              ins = ins.concat("execute if score block bsc matches .."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
-            }
-          } else {
-              ins = ins.concat("execute if score block bsc matches .."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
+          } else if(current[0] && !next[0]) {
+            ins = ins.concat("execute if score block bsc matches "+current[0].id+".. run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
+          } else if(!current[0] && next[0]) {
+            ins = ins.concat("execute if score block bsc matches .."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
           }
         }
       }
@@ -177,7 +198,9 @@ function parse_input(zip,tree,folder,command) {
   for(var i = 0; i < length; i+=(tree)) {
     var ins = "";
       for(var j = 0; j < tree; j++) {
+        var ins1 = "";
         if(l==0 && typeof temp_blocks[i+j] != 'undefined') {
+          var property_flag = 0;
           var props = all_blocks.filter(obj => {
             return obj.block === temp_blocks[i+j];
           })
@@ -194,10 +217,19 @@ function parse_input(zip,tree,folder,command) {
               }
               prop_list = prop_list.substring(0, prop_list.length - 1);
               prop_list1 = prop_list1.substring(0, prop_list1.length - 1);
+
+              demo = demo.replace(/\$props/g,prop_list);
+              ins1 = ins1.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
+              property_flag = 1;
+              if(u==0)
+                ins = ins.concat("execute if block ~ ~ ~ "+temp_blocks[i+j]+" run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");
+            } else {
+              demo = demo.replace(/\$props/g,prop_list);
+              ins = ins.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
             }
-            demo = demo.replace(/\$props/g,prop_list);
-            ins = ins.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
           }
+          if(property_flag)
+            zip.file(["bsc/functions/"+folder+"/l"+l+"/p/l"+l+"_"+parseInt(i+j)+".mcfunction"],ins1);
         } else if(typeof temp_blocks[i+j] != 'undefined') {
           ins = ins.concat("execute if block ~ ~ ~ "+temp_blocks[i+j]+" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
         }
