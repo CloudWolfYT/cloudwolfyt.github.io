@@ -1,0 +1,144 @@
+{
+  "minecraft:air": {
+    "states": [
+      {
+        "id": 0,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:stone": {
+    "states": [
+      {
+        "id": 1,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:granite": {
+    "states": [
+      {
+        "id": 2,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:polished_granite": {
+    "states": [
+      {
+        "id": 3,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:diorite": {
+    "states": [
+      {
+        "id": 4,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:polished_diorite": {
+    "states": [
+      {
+        "id": 5,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:andesite": {
+    "states": [
+      {
+        "id": 6,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:polished_andesite": {
+    "states": [
+      {
+        "id": 7,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:grass_block": {
+    "properties": {
+      "snowy": [
+        "true",
+        "false"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "snowy": "true"
+        },
+        "id": 8
+      },
+      {
+        "properties": {
+          "snowy": "false"
+        },
+        "id": 9,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:dirt": {
+    "states": [
+      {
+        "id": 10,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:coarse_dirt": {
+    "states": [
+      {
+        "id": 11,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:podzol": {
+    "properties": {
+      "snowy": [
+        "true",
+        "false"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "snowy": "true"
+        },
+        "id": 12
+      },
+      {
+        "properties": {
+          "snowy": "false"
+        },
+        "id": 13,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:cobblestone": {
+    "states": [
+      {
+        "id": 14,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:oak_planks": {
+    "states": [
+      {
+        "id": 15,
+        "default": true
+      }
+    ]
+  }
+}
