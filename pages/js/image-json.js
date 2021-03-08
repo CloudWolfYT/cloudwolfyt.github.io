@@ -76,15 +76,28 @@ function extract_data(imageData,ele,startpt) {
 }
 
 function getCode() {
-  if(document.getElementById("tellrawChoice").checked) {
-  area.value = 'tellraw @s [' + extract_data(imageData,imageData.length,0) + ']';
-  } else {
+  const tellrawChoiceChecked = document.getElementById("tellrawChoice").checked
+  const hologramChoiceChecked = document.getElementById("hologramChoice").checked
+  const scoreboardChoiceCecked = document.getElementById("scoreboardChoice").checked
+
+  if(tellrawChoiceChecked) {
+    area.value = 'tellraw @s [' + extract_data(imageData,imageData.length,0) + ']';
+  } else if (hologramChoiceChecked) {
     area.value = '#list of summon entities';
     for(var i = 0; i < nh; i++) {
       area.value = area.value.concat('\nsummon area_effect_cloud ~ ~'+ ((nh - i)*0.225) +' ~ {Age:-2147483648,Duration:-1,WaitTime:-2147483648,Tags:["cw_hologram","'+myname +'"],CustomNameVisible:1b,CustomName:\'[' + extract_data(imageData,nh*4,i*nh*4) + ']\'}');    
     }
+  } else if (scoreboardChoiceCecked) {
+    /*
+    for(let width = 46; width > 0; width--) {
+      for(let height = 15; height > 0; height--) {
+        area.value = area.value.concat(`team modify videosuffix`)
+      }
+    }
+    */
   }
-  download(area.value,'export','.txt');
+
+  download(area.value,'export','.txt'); //
 }
 
 function copy_text() {
@@ -132,27 +145,66 @@ function getExtension(filename) {
 }
 
 function processVideo(path,e,dur) {
+  const tellrawChoiceChecked = document.getElementById("tellrawChoice").checked
+  const hologramChoiceChecked = document.getElementById("hologramChoice").checked
+  const scoreboardChoiceCecked = document.getElementById("scoreboardChoice").checked
+
    nw = document.getElementById("width").value;
    nh = document.getElementById("height").value;
    fps = document.getElementById('fps').value;
    counter.textContent = Math.floor(dur*fps);
-   if(document.getElementById("tellrawChoice").checked) {
-   area.value = "scoreboard players add @s cw_images 1\nscoreboard players set @s[scores={cw_images="+Math.floor(dur*fps)+"..}] cw_images 0";
-   } else {
+
+   if(tellrawChoiceChecked) {
+    area.value = "scoreboard players add @s cw_images 1\nscoreboard players set @s[scores={cw_images="+Math.floor(dur*fps)+"..}] cw_images 0";
+   } else if(hologramChoiceChecked) {
     area.value = "scoreboard players add "+myname+" cw_images 1\nexecute if score "+myname+" cw_images matches "+Math.floor(dur*fps)+".. run scoreboard players set "+myname+" cw_images 0";  
+   
+   } else if(scoreboardChoiceCecked) {
+    area.value = area.value.concat(
+      'team add video','\n',
+      'team add videosuffix0','\n',
+      'team add videosuffix1','\n',
+      'team add videosuffix2','\n',
+      'team add videosuffix3','\n',
+      'team add videosuffix4','\n',
+      'team add videosuffix5','\n',
+      'team add videosuffix6','\n',
+      'team add videosuffix7','\n',
+      'team add videosuffix8','\n',
+      'team add videosuffix9','\n',
+      'team add videosuffix10','\n',
+      'team add videosuffix11','\n',
+      'team add videosuffix12','\n',
+      'team add videosuffix13','\n',
+      'team add videosuffix14','\n',
+      'team add videosuffix15','\n' //Unused currrently but perhaps looking up and down could change height given our the 15 restricted players in a scoreboard sidebar.
+    )
    }
+
    for(var i = 1; i < Math.floor(dur*fps) + 1; i++) {
      var k = i/fps;
      getVideoImageAsArray(path,k,vidDone);
    }
 }
 function vidDone(imageData,e,vidDur,pp) {
-  if(document.getElementById("tellrawChoice").checked) {
-  area.value = area.value.concat('\nexecute if score @s cw_images matches '+ pp + ' run tellraw @s [' + extract_data(imageData,imageData.length,0) + ']');
-  } else {
+  const tellrawChoiceChecked = document.getElementById("tellrawChoice").checked
+  const hologramChoiceChecked = document.getElementById("hologramChoice").checked
+  const scoreboardChoiceCecked = document.getElementById("scoreboardChoice").checked
+
+  if(tellrawChoiceChecked) {
+    area.value = area.value.concat('\nexecute if score @s cw_images matches '+ pp + ' run tellraw @s [' + extract_data(imageData,imageData.length,0) + ']');
+  } else if (hologramChoiceChecked) {
     for(var i = 0; i < nh; i++) {
       area.value = area.value.concat('\nexecute if score '+myname +' cw_images matches '+ pp + ' run summon area_effect_cloud ~ ~'+ ((nh - i)*0.225) +' ~ {Age:-2147483648,Duration:-1,WaitTime:-2147483648,Tags:["cw_hologram","'+myname +'"],CustomNameVisible:1b,CustomName:\'[' + extract_data(imageData,nh*4,i*nh*4) + ']\'}');    
     }
+  } else if (scoreboardChoiceCecked) {
+    for(var i = 0; i < nh; i++) {
+      area.value = area.value.concat(
+        '\n',
+        `execute if score ${myname} cw_images matches ${pp} run team modify videosuffix${i} suffix [${extract_data(imageData,nh*4,i*nh*4)}]`
+      )
+    }
+
   }
   counter.textContent = parseInt(counter.textContent) - 1;
   if(parseInt(counter.textContent) == 0) {
