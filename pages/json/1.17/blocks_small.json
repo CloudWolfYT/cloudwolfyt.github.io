@@ -1,0 +1,299 @@
+{
+  "minecraft:air": {
+    "states": [
+      {
+        "id": 0,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:stone": {
+    "states": [
+      {
+        "id": 1,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:granite": {
+    "states": [
+      {
+        "id": 2,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:polished_granite": {
+    "states": [
+      {
+        "id": 3,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:diorite": {
+    "states": [
+      {
+        "id": 4,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:polished_diorite": {
+    "states": [
+      {
+        "id": 5,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:andesite": {
+    "states": [
+      {
+        "id": 6,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:polished_andesite": {
+    "states": [
+      {
+        "id": 7,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:grass_block": {
+    "properties": {
+      "snowy": [
+        "true",
+        "false"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "snowy": "true"
+        },
+        "id": 8
+      },
+      {
+        "properties": {
+          "snowy": "false"
+        },
+        "id": 9,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:dirt": {
+    "states": [
+      {
+        "id": 10,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:coarse_dirt": {
+    "states": [
+      {
+        "id": 11,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:podzol": {
+    "properties": {
+      "snowy": [
+        "true",
+        "false"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "snowy": "true"
+        },
+        "id": 12
+      },
+      {
+        "properties": {
+          "snowy": "false"
+        },
+        "id": 13,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:cobblestone": {
+    "states": [
+      {
+        "id": 14,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:oak_planks": {
+    "states": [
+      {
+        "id": 15,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:spruce_planks": {
+    "states": [
+      {
+        "id": 16,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:birch_planks": {
+    "states": [
+      {
+        "id": 17,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:jungle_planks": {
+    "states": [
+      {
+        "id": 18,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:acacia_planks": {
+    "states": [
+      {
+        "id": 19,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:dark_oak_planks": {
+    "states": [
+      {
+        "id": 20,
+        "default": true
+      }
+    ]
+  },
+  "minecraft:oak_sapling": {
+    "properties": {
+      "stage": [
+        "0",
+        "1"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "stage": "0"
+        },
+        "id": 21,
+        "default": true
+      },
+      {
+        "properties": {
+          "stage": "1"
+        },
+        "id": 22
+      }
+    ]
+  },
+  "minecraft:spruce_sapling": {
+    "properties": {
+      "stage": [
+        "0",
+        "1"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "stage": "0"
+        },
+        "id": 23,
+        "default": true
+      },
+      {
+        "properties": {
+          "stage": "1"
+        },
+        "id": 24
+      }
+    ]
+  },
+  "minecraft:birch_sapling": {
+    "properties": {
+      "stage": [
+        "0",
+        "1"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "stage": "0"
+        },
+        "id": 25,
+        "default": true
+      },
+      {
+        "properties": {
+          "stage": "1"
+        },
+        "id": 26
+      }
+    ]
+  },
+  "minecraft:jungle_sapling": {
+    "properties": {
+      "stage": [
+        "0",
+        "1"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "stage": "0"
+        },
+        "id": 27,
+        "default": true
+      },
+      {
+        "properties": {
+          "stage": "1"
+        },
+        "id": 28
+      }
+    ]
+  },
+  "minecraft:acacia_sapling": {
+    "properties": {
+      "stage": [
+        "0",
+        "1"
+      ]
+    },
+    "states": [
+      {
+        "properties": {
+          "stage": "0"
+        },
+        "id": 29,
+        "default": true
+      },
+      {
+        "properties": {
+          "stage": "1"
+        },
+        "id": 30
+      }
+    ]
+  }
+}

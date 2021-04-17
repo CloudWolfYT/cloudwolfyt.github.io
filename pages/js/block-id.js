@@ -26,8 +26,8 @@ function get_zip1() {
     parse_output(zip,tree,"setblock","execute if score block bsc matches $id run setblock ~ ~ ~ $block[$props]");
   }
   if(document.getElementsByName('opMirrored')[0].checked) {
-    zip.folder("bsc/functions/mirrored");
-    get_setblock_mirrored(zip,tree,"mirrored","setblock ~ ~ ~ ","");
+    //zip.folder("bsc/functions/mirrored");
+    //get_setblock_mirrored(zip,tree,"mirrored","setblock ~ ~ ~ ","");
   }
   if(document.getElementsByName('opFallBlock')[0].checked) {
     zip.folder("bsc/functions/falling_block");
@@ -46,7 +46,6 @@ function get_zip1() {
 async function getDatapack(zip) {
   const content = await zip.generateAsync({ type: "blob" });
   saveAs(content, `cw_bsc_namespace.zip`);
-  //document.getElementById("pbarDiv").style = "visibility:hidden";
 }
 
 function get_jsons(block_list) { //transforms the blocks.json into a full length object
@@ -104,89 +103,92 @@ function block_tags(zip,tree) {
     temp_blocks = new_blocks;
   }
 }
-
 function parse_output(zip,tree,folder,command) {
-  var temp_blocks = blocks;
-  var levels = Math.ceil(Math.log(blocks.length)/Math.log(tree));
-  for(var l = 0; l<levels; l++) {
-  var m = 0;
-  var length = temp_blocks.length;
-  var new_blocks = [];
-  zip.folder("bsc/functions/"+folder+"/l"+l);
-  for(var i = 0; i < length; i+=(tree)) {
-    var ins = "";
-      for(var j = 0; j < tree; j++) {
-        var ins1 = "";
-        var property_flag = 0;
-        if(l==0 && typeof temp_blocks[i+j] != 'undefined') {
-          var props = all_blocks.filter(obj => {
-            return obj.block === temp_blocks[i+j];
-          })
-          for(u in props) {
-            var demo = command.replace(/\$id/g,props[u].id);
-            demo = demo.replace(/\$block/g,temp_blocks[i+j]);
-            var prop_list = "";
-            var prop_list1 = "";
-            if(props[u].properties) {
-              var key = Object.keys(props[u].properties);
-              for(v in key) {
-                 prop_list = prop_list.concat(key[v]+"="+props[u].properties[key[v]]+",");
-                 prop_list1 = prop_list1.concat(key[v]+":"+props[u].properties[key[v]]+",");
-              }
-              prop_list = prop_list.substring(0, prop_list.length - 1);
-              prop_list1 = prop_list1.substring(0, prop_list1.length - 1);
+  var nblocks = blocks.length;
+  var levels = Math.ceil(Math.log(nblocks)/Math.log(tree));
+  var id_front = [nblocks];
+  var id_end = [nblocks];
+  var ins = "";
 
-              demo = demo.replace(/\$props/g,prop_list);
-              ins1 = ins1.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
-              property_flag = 1;
-              if(u==0) {
-                var current = all_blocks.filter(obj => {
-                  return obj.block === temp_blocks[i-tree+1+j+1];
-                })
-                var next = all_blocks.filter(obj => {
-                  return obj.block === temp_blocks[i-tree+1+j+1+1];
-                })
-                if(current[0] && next[0]) {
-                  ins = ins.concat("execute if score block bsc matches "+current[0].id+".."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");
-                } else if(current[0] && !next[0]) {
-                  ins = ins.concat("execute if score block bsc matches "+current[0].id+".. run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");
-                } else if(!current[0] && next[0]) {
-                  ins = ins.concat("execute if score block bsc matches .."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l)+"/p/l"+(l)+"_"+parseInt(i+j)+"\n");   
-                }
-              }
-            } else {
-              demo = demo.replace(/\$props/g,prop_list);
-              ins = ins.concat(demo.replace(/\$nprops/g,prop_list1)+"\n");
-            }
+  for(var i = 0; i < nblocks; i++) {
+    var tblock = all_blocks.filter(obj => {return obj.block === blocks[i];})
+    id_front[i] = tblock[0].id;
+    id_end[i] = tblock[tblock.length - 1].id;
+  }
+
+  zip.folder("bsc/functions/"+folder+"/l"+0+"/p");
+  m = 0; p = 0; ins = ""; ins1 = ""; l = 0; y = 0;
+  for(var i = 0; i < nblocks; i+=tree) {
+    for(var j = i; j < i+tree; j++) {
+      var tblock = all_blocks.filter(obj => {return obj.block === blocks[j];})
+      for(u in tblock) {
+        var cmd = command.replace(/\$id/g,tblock[u].id);
+        cmd = cmd.replace(/\$block/g,tblock[u].block);
+        has_properties = 0;
+        if(tblock[u].properties) {
+          var prop_list = "";
+          var prop_list1 = "";
+          var key = Object.keys(tblock[u].properties);
+          for(v in key) {
+             prop_list = prop_list.concat(key[v]+"="+tblock[u].properties[key[v]]+",");
+             prop_list1 = prop_list1.concat(key[v]+":"+tblock[u].properties[key[v]]+",");
           }
-          if(property_flag)
-            zip.file(["bsc/functions/"+folder+"/l"+l+"/p/l"+l+"_"+parseInt(i+j)+".mcfunction"],ins1);
-        } else if(typeof temp_blocks[i+j] != 'undefined') {
-          var current = all_blocks.filter(obj => {
-            return obj.block === temp_blocks[i-tree+1+j+1];
-          })
-          var next = all_blocks.filter(obj => {
-            return obj.block === temp_blocks[i-tree+1+j+1+1];
-          })
-          if(current[0] && next[0]) {
-            ins = ins.concat("execute if score block bsc matches "+current[0].id+".."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-          } else if(current[0] && !next[0]) {
-            ins = ins.concat("execute if score block bsc matches "+current[0].id+".. run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-          } else if(!current[0] && next[0]) {
-            ins = ins.concat("execute if score block bsc matches .."+ parseInt(next[0].id -1) +" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
-          }
+          prop_list = prop_list.substring(0, prop_list.length - 1);
+          prop_list1 = prop_list1.substring(0, prop_list1.length - 1);
+
+          cmd = cmd.replace(/\$props/g,prop_list);
+          ins1 = ins1.concat(cmd.replace(/\$nprops/g,prop_list1)+"\n");
+          has_properties = 1;
         }
       }
-      new_blocks.push(temp_blocks[i]);
-      zip.file(["bsc/functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
-      if(l==levels-1) {
-        zip.file(["bsc/functions/"+folder+".mcfunction"],"function bsc:"+folder+"/l"+l+"/l"+l+"_"+m);
+      if(has_properties) {
+        zip.file(["bsc/functions/"+folder+"/l"+l+"/p/l"+l+"_"+y+".mcfunction"],ins1);
+        ins1 = "";
+        ins = ins.concat("execute if score block bsc matches " + tblock[0].id + ".." + tblock[tblock.length-1].id + " run function bsc:"+folder+"/l"+l+"/p/l"+l+"_"+y+"\n");
+        y++;
+      } else {
+        var cmd = command.replace(/\$id/g,tblock[u].id);
+        cmd = cmd.replace(/\$block/g,tblock[u].block);
+        cmd = cmd.replace(/\$props/g,"");
+        cmd = cmd.replace(/\$nprops/g,"");
+        ins = ins.concat(cmd+"\n");
       }
-      m++;
     }
-    temp_blocks = new_blocks;
+    if(p==0 || i+tree >= nblocks) {
+      zip.file(["bsc/functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
+      p = 0;
+      m++;
+      ins = "";
+    }
+  }
+
+  for(var l = 1; l < levels; l++) {
+    zip.folder("bsc/functions/"+folder+"/l"+l);
+    k = 0;
+    p = 0;
+    m=0;
+    for(var i = 0; i < nblocks; i+=tree) {
+      var i2 = i+tree-1;
+      if(i+tree >= nblocks && (nblocks % tree) > 0) {i2 = i + (nblocks % tree) - 1;}
+      ins = ins.concat("execute if score block bsc matches "+id_front[i]+".."+id_end[i2]+" run function bsc:"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+k+"\n");
+      id_front[k] = id_front[i];
+      id_end[k] = id_end[i2];
+      p++;
+      if(p==tree || i+tree >= nblocks) {
+        zip.file(["bsc/functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
+        p = 0;
+        m++;
+        ins = "";
+      }
+      k++;
+    }
+    nblocks = Math.floor(nblocks / tree);
+    if(l==levels-1) {
+      zip.file(["bsc/functions/"+folder+".mcfunction"],"function bsc:"+folder+"/l"+l+"/l"+l+"_"+0);
+    }
   }
 }
+
 function parse_input(zip,tree,folder,command) {
   var temp_blocks = blocks;
   var levels = Math.ceil(Math.log(blocks.length)/Math.log(tree));
