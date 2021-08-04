@@ -15,9 +15,9 @@ function get_zip() {
   var zip = new JSZip();
   zip.folder("functions");
   if(fold.checked) {
-    parse_output_folded(zip,parseInt(branches.value),folder.value,output.value,parseInt(elements.value),parseInt(start.value),namespace.value,player.value,objective.value);
+    parse_output_folded(zip,parseInt(branches.value),folder.value,output.value,parseInt(start.value),parseInt(elements.value),namespace.value,player.value,objective.value);
   } else {
-    parse_output(zip,parseInt(branches.value),folder.value,output.value,parseInt(elements.value),parseInt(start.value),namespace.value,player.value,objective.value);
+    parse_output(zip,parseInt(branches.value),folder.value,output.value,parseInt(start.value),parseInt(elements.value),namespace.value,player.value,objective.value);
   }
   getDatapack(zip);
 }
@@ -27,102 +27,62 @@ async function getDatapack(zip) {
   //document.getElementById("pbarDiv").style = "visibility:hidden";
 }
 
-function parse_output(zip,tree,folder,command,length,start_pt,namespace,player,objective) {
-  //establish tree numberspace and settings
+function parse_output(zip,tree,folder,command,start,end,namespace,player,objective) {
+  if(start > end) {
+    var l = start;
+    start = end;
+    end = l;
+  }
+  var length = end - start;
   var levels = Math.ceil(Math.log(length)/Math.log(tree));
-  var numLine = [];
-  for (var i = 0; i <= length; i++) {
-    numLine[i] = i+start_pt;
+  var id_front = [length];
+  var id_end = [length];
+  var ins = "";
+
+  for(var i = 0; i < length; i++) {
+    id_front[i] = i+start;
+    id_end[i] = i+1+start;
   }
 
-  for(var l = 0; l<levels+1; l++) {
-    var m = 0;
-    var length = numLine.length;
-    var new_numLine = [];
-    zip.folder("functions/"+folder+"/l"+l);
-  for(var i = 0; i < length; i+=(tree)) {
-    var ins = "";
-    if(l==0) {
-      for(k = i; (k < (i + tree) && !(k>=length)); k++) {
-        var demo = command.replace(/\$score/g,numLine[k]);
-        demo = demo.replace(/\$objective/g,objective);
-        new_numLine.push(numLine[k]);
-        zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+k+".mcfunction"],demo);
+  m = 0; ins = ""; ins1 = ""; l = 0; y = 0;
+  for(var i = 0; i < length; i+=tree) {
+    for(var j = i; j < i+tree; j++) {
+      if(j < length) {
+        var cmd = command.replace(/\$score/g,j + start);
+        cmd = cmd.replace(/\$objective/g,objective);
+        cmd = cmd.replace(/\$props/g,"");
+        cmd = cmd.replace(/\$nprops/g,"");
+        ins = ins.concat(cmd+"\n"); 
       }
-    } else {
-      for(var j = 0; j < tree; j++) {
-          if(l==1) {
-            ins = ins.concat("execute if score "+player+" "+objective+" matches "+numLine[i-tree+1+j+1]+" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n")
-          } else {
-            var current = numLine[i-tree+1+j+1];
-            var next = numLine[i-tree+1+j+1+1];
-            if(i+j>0) {
-            if(current && next) {
-              ins = ins.concat("execute if score "+player+" "+objective+" matches "+current+".."+ parseInt(next -1) +" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-              } else if(current && !next) {
-                ins = ins.concat("execute if score "+player+" "+objective+" matches "+current+".. run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-              } else if(!current && next) {
-                ins = ins.concat("execute if score "+player+" "+objective+" matches .."+ parseInt(next -1) +" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
-              }
-            } else {
-                ins = ins.concat("execute if score "+player+" "+objective+" matches .."+ parseInt(next -1) +" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
-            }
-          }
-        }
-        new_numLine.push(numLine[i]);
-        zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
-        if(l==levels) {
-          zip.file(["functions/"+folder+".mcfunction"],"function "+namespace+":"+folder+"/l"+l+"/l"+l+"_"+m);
-        }
-      }
-      m++;
     }
-    numLine = new_numLine;
-  }
-}
-function parse_output_folded(zip,tree,folder,command,length,start_pt,namespace,player,objective) {
-  //establish tree numberspace and settings
-  var levels = Math.ceil(Math.log(length)/Math.log(tree));
-  var numLine = [];
-  for (var i = 0; i <= length; i++) {
-    numLine[i] = i+start_pt;
+    zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
+    m++;
+    ins = "";
   }
 
-  for(var l = 0; l<levels; l++) {
-    var m = 0;
-    var length = numLine.length;
-    var new_numLine = [];
+  for(var l = 1; l < levels; l++) {
     zip.folder("functions/"+folder+"/l"+l);
-  for(var i = 0; i < length; i+=(tree)) {
-    var ins = "";
-      for(var j = 0; j < tree; j++) {
-          if(l==0) {
-            var demo = command.replace(/\$score/g,numLine[i-tree+1+j+1]);
-            demo = demo.replace(/\$objective/g,objective);
-            ins = ins.concat(demo + '\n');
-          } else {
-            var current = numLine[i-tree+1+j+1];
-            var next = numLine[i-tree+1+j+1+1];
-            if(i+j>0) {
-            if(current && next) {
-              ins = ins.concat("execute if score "+player+" "+objective+" matches "+current+".."+ parseInt(next -1) +" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-              } else if(current && !next) {
-                ins = ins.concat("execute if score "+player+" "+objective+" matches "+current+".. run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");
-              } else if(!current && next) {
-                ins = ins.concat("execute if score "+player+" "+objective+" matches .."+ parseInt(next -1) +" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
-              }
-            } else {
-                ins = ins.concat("execute if score "+player+" "+objective+" matches .."+ parseInt(next -1) +" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+parseInt(i+j)+"\n");   
-            }
-          }
-        }
-        new_numLine.push(numLine[i]);
+    k = 0;
+    p = 0;
+    m=0;
+    for(var i = 0; i < length; i+=tree) {
+      var i2 = i+tree-1;
+      if(i+tree >= length && (length % tree) > 0) {i2 = i + (length % tree) - 1;}
+      ins = ins.concat("execute if score "+player+" "+objective+" matches "+id_front[i]+".."+id_end[i2]+" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+k+"\n");
+      id_front[k] = id_front[i];
+      id_end[k] = id_end[i2];
+      p++;
+      if(p==tree || i+tree >= length) {
         zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
-        if(l==levels-1) {
-          zip.file(["functions/"+folder+".mcfunction"],"function "+namespace+":"+folder+"/l"+l+"/l"+l+"_"+m);
-        }
-      m++;
+        p = 0;
+        m++;
+        ins = "";
+      }
+      k++;
     }
-    numLine = new_numLine;
+    length = Math.floor(length / tree);
+    if(l==levels-1) {
+      zip.file(["functions/"+folder+".mcfunction"],"function "+namespace+":"+folder+"/l"+l+"/l"+l+"_"+0);
+    }
   }
 }
