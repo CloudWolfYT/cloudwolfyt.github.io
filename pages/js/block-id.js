@@ -147,11 +147,13 @@ function parse_output(zip,tree,folder,command) {
         ins = ins.concat("execute if score block bsc matches " + tblock[0].id + ".." + tblock[tblock.length-1].id + " run function bsc:"+folder+"/l"+l+"/p/l"+l+"_"+y+"\n");
         y++;
       } else {
-        var cmd = command.replace(/\$id/g,tblock[u].id);
-        cmd = cmd.replace(/\$block/g,tblock[u].block);
-        cmd = cmd.replace(/\$props/g,"");
-        cmd = cmd.replace(/\$nprops/g,"");
-        ins = ins.concat(cmd+"\n");
+        for(u in tblock) {
+          var cmd = command.replace(/\$id/g,tblock[u].id);
+          cmd = cmd.replace(/\$block/g,tblock[u].block);
+          cmd = cmd.replace(/\$props/g,"");
+          cmd = cmd.replace(/\$nprops/g,"");
+          ins = ins.concat(cmd+"\n");
+        }
       }
     }
     if(p==0 || i+tree >= nblocks) {
