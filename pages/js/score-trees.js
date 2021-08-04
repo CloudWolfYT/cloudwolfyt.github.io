@@ -14,11 +14,11 @@ var pbar = document.getElementById("progress_bar");
 function get_zip() {
   var zip = new JSZip();
   zip.folder("functions");
-  if(fold.checked) {
-    parse_output_folded(zip,parseInt(branches.value),folder.value,output.value,parseInt(start.value),parseInt(elements.value),namespace.value,player.value,objective.value);
-  } else {
+  //if(fold.checked) {
+  //  parse_output_folded(zip,parseInt(branches.value),folder.value,output.value,parseInt(start.value),parseInt(elements.value),namespace.value,player.value,objective.value);
+  //} else {
     parse_output(zip,parseInt(branches.value),folder.value,output.value,parseInt(start.value),parseInt(elements.value),namespace.value,player.value,objective.value);
-  }
+  //}
   getDatapack(zip);
 }
 async function getDatapack(zip) {
