@@ -210,7 +210,7 @@ function parse_output(zip,tree,folder,command,start,end,namespace,player,objecti
 	  length = Math.floor(length / tree);
 	}
 	  var commands = "#Particles Generated with: Cloud Wolf's Particle Grapher";
-	  commands = commands.concat("\n scoreboard objectives add "+objective+" dummy");
+	  commands = commands.concat("\nscoreboard objectives add "+objective+" dummy");
 	  commands = commands.concat("\nfunction "+namespace+":"+folder+"/l"+q+"/l"+q+"_"+0);
 	  commands = commands.concat("\nscoreboard players add "+player+" "+objective+" 1");
 	  commands = commands.concat("\nexecute if score "+player+" "+objective+" matches "+end+".. run scoreboard players set "+player+" "+objective+" 0");
