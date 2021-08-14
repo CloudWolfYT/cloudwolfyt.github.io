@@ -150,7 +150,7 @@ function animate_particles(zip) {
 	if(is_global.checked)
 		id_name = "$"+Math.floor(Math.random() * 32768);
 		
-	parse_output(zip,8,folder.value,"execute if score "+id_name+" $objective matches $score run function test:"+folder.value+"/frames/f$score",0,k,namespace.value,id_name,"cw_particleplot");
+	parse_output(zip,8,folder.value,"execute if score "+id_name+" $objective matches $score run function "+namespace.value+":"+folder.value+"/frames/f$score",0,k,namespace.value,id_name,"cw_particleplot");
 }
 
 function parse_output(zip,tree,folder,command,start,end,namespace,player,objective) {
@@ -176,8 +176,6 @@ function parse_output(zip,tree,folder,command,start,end,namespace,player,objecti
 		if(j < length) {
 		  var cmd = command.replace(/\$score/g,j + start);
 		  cmd = cmd.replace(/\$objective/g,objective);
-		  cmd = cmd.replace(/\$props/g,"");
-		  cmd = cmd.replace(/\$nprops/g,"");
 		  ins = ins.concat(cmd+"\n"); 
 		}
 	  }
