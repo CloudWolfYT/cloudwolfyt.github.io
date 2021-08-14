@@ -150,7 +150,7 @@ function animate_particles(zip) {
 	if(is_global.checked)
 		id_name = "$"+Math.floor(Math.random() * 32768);
 		
-	parse_output(zip,8,folder.value,"execute if score "+id_name+" $objective matches $score run function test:"+folder.value+"/frames/f$score",0,k,namespace.value,id_name,"cw_animate");
+	parse_output(zip,8,folder.value,"execute if score "+id_name+" $objective matches $score run function test:"+folder.value+"/frames/f$score",0,k,namespace.value,id_name,"cw_particleplot");
 }
 
 function parse_output(zip,tree,folder,command,start,end,namespace,player,objective) {
@@ -210,7 +210,7 @@ function parse_output(zip,tree,folder,command,start,end,namespace,player,objecti
 	  length = Math.floor(length / tree);
 	}
 	  var commands = "#Particles Generated with: Cloud Wolf's Particle Grapher";
-	  commands = commands.concat("\n scoreboard objectives add cw_animate dummy");
+	  commands = commands.concat("\n scoreboard objectives add "+objective+" dummy");
 	  commands = commands.concat("\nfunction "+namespace+":"+folder+"/l"+q+"/l"+q+"_"+0);
 	  commands = commands.concat("\nscoreboard players add "+player+" "+objective+" 1");
 	  commands = commands.concat("\nexecute if score "+player+" "+objective+" matches "+end+".. run scoreboard players set "+player+" "+objective+" 0");
