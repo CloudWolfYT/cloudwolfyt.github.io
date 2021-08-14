@@ -6,7 +6,13 @@ const particle_extras = document.getElementById("particle_extras");
 const particle_closer = document.getElementById("particle_closer");
 const opacity_slider = document.getElementById("opacity");
 const settings = document.getElementById("settings");
+const is_animate = document.getElementById("is_animate");
+const animate = document.getElementById("animate");
+const ppf = document.getElementById("ppf");
 const presets = document.getElementById("presets");
+const namespace = document.getElementById("namespace");
+const folder = document.getElementById("folder");
+const is_global = document.getElementById("is_global");
 
 var is_extras = false;
 var plot_data = [];
@@ -119,10 +125,105 @@ function raw_particles(zip) {
 	zip.file(["particles.mcfunction"],commands);
 }
 
+function animate_particles(zip) {
+	const points = parseInt(time_scale.value);
+	const pointsf = parseInt(ppf.value);
+	if(pointsf >= 8) {
+		var k = 0;
+		for(var i = 0; i < points; i += pointsf) {
+			var commands = "";
+			for(var j = i; j < (i + pointsf); j++) {
+				if(j < points) {
+					if(is_extras) {
+						commands = commands.concat("\nparticle "+particle.value+" "+particle_extras.value+" ^"+plot_data[0][j].toFixed(3)+" ^"+plot_data[2][j].toFixed(3)+" ^"+plot_data[1][j].toFixed(3)+" "+particle_closer.value);
+					} else {
+						commands = commands.concat("\nparticle "+particle.value+" ^"+plot_data[0][j].toFixed(3)+" ^"+plot_data[2][j].toFixed(3)+" ^"+plot_data[1][j].toFixed(3)+" "+particle_closer.value);
+					}
+				}
+			}
+			zip.file(["functions/"+folder.value+"/frames/f"+k+".mcfunction"],commands);
+			k++;
+		}
+	}
+	// fake player names randomly (global context only)
+	var id_name = "@s";
+	if(is_global.checked)
+		id_name = "$"+Math.floor(Math.random() * 32768);
+		
+	parse_output(zip,8,folder.value,"execute if score "+id_name+" $objective matches $score run function test:"+folder.value+"/frames/f$score",0,k,namespace.value,id_name,"cw_animate");
+}
+
+function parse_output(zip,tree,folder,command,start,end,namespace,player,objective) {
+	if(start > end) {
+	  var l = start;
+	  start = end;
+	  end = l;
+	}
+	var length = end - start;
+	var levels = Math.ceil(Math.log(length)/Math.log(tree));
+	var id_front = [length];
+	var id_end = [length];
+	var ins = "";
+  
+	for(var i = 0; i < length; i++) {
+	  id_front[i] = i+start;
+	  id_end[i] = i+start;
+	}
+  
+	m = 0; ins = ""; ins1 = ""; l = 0; y = 0;
+	for(var i = 0; i < length; i+=tree) {
+	  for(var j = i; j < i+tree; j++) {
+		if(j < length) {
+		  var cmd = command.replace(/\$score/g,j + start);
+		  cmd = cmd.replace(/\$objective/g,objective);
+		  cmd = cmd.replace(/\$props/g,"");
+		  cmd = cmd.replace(/\$nprops/g,"");
+		  ins = ins.concat(cmd+"\n"); 
+		}
+	  }
+	  zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
+	  m++;
+	  ins = "";
+	}
+	var q = 0;
+	for(var l = 1; l < levels; l++) {
+		q++;
+	  zip.folder("functions/"+folder+"/l"+l);
+	  k = 0;
+	  p = 0;
+	  m=0;
+	  for(var i = 0; i < length; i+=tree) {
+		var i2 = i+tree-1;
+		if(i+tree >= length && (length % tree) > 0) {i2 = i + (length % tree) - 1;}
+		ins = ins.concat("execute if score "+player+" "+objective+" matches "+id_front[i]+".."+( id_end[i2] )+" run function "+namespace+":"+folder+"/l"+(l-1)+"/l"+(l-1)+"_"+k+"\n");
+		id_front[k] = id_front[i];
+		id_end[k] = id_end[i2];
+		p++;
+		if(p==tree || i+tree >= length) {
+		  zip.file(["functions/"+folder+"/l"+l+"/l"+l+"_"+m+".mcfunction"],ins);
+		  p = 0;
+		  m++;
+		  ins = "";
+		}
+		k++;
+	  }
+	  length = Math.floor(length / tree);
+	}
+	  var commands = "#Particles Generated with: Cloud Wolf's Particle Grapher";
+	  commands = commands.concat("\n scoreboard objectives add cw_animate dummy");
+	  commands = commands.concat("\nfunction "+namespace+":"+folder+"/l"+q+"/l"+q+"_"+0);
+	  commands = commands.concat("\nscoreboard players add "+player+" "+objective+" 1");
+	  commands = commands.concat("\nexecute if score "+player+" "+objective+" matches "+end+".. run scoreboard players set "+player+" "+objective+" 0");
+	  zip.file(["functions/"+folder+"/animate.mcfunction"],commands);
+	
+  }
+
 function exports() {
 	var zip = new JSZip();
-
-	raw_particles(zip);
+	if(is_animate.checked)
+		animate_particles(zip);
+	else
+		raw_particles(zip);
 	
 	getZip(zip);
 }
@@ -172,3 +273,12 @@ function settings_toggle() {
 	}
 }
 settings_toggle();
+
+function animate_toggle() {
+	if (animate.style.display === "none") {
+		animate.style.display = "block";
+	} else {
+		animate.style.display = "none";
+	}
+}
+animate_toggle();

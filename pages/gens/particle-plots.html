@@ -26,19 +26,33 @@
 
     <section class="main-section">
         <h1 class="main-title">Particle Plots</h1>
-        <button class="button error" onclick='this.blur(); window.open("")' id="blob">YT Video</button>
+        <button class="button" onclick='this.blur(); window.open("https://www.youtube.com/watch?v=_mi1B0IeVWw")' id="blob">YT Video</button>
         <br>
 
-        <form oninput="result.value=parseInt(time_scale.value)" class = "section">
+        <form oninput="result.value=parseInt(time_scale.value); ppf.max = time_scale.value;" class = "section">
             <label for="time_min">Time Min:</label>
             <input type="number" min=-50 max= 50 value="0" class = "text-field" id = "time_min", style='width:6%'>
             <label for="time_max">Time Max:</label>
             <input type="number" min=-50 max= 50 value="20" class = "text-field" id = "time_max", style='width:6%'>
             <label for="time_scale">Points:</label>
-            <input type="range" min=0 max= 1000 value="100" class = "slider" id = "time_scale">
-            <output id = "time_result" name="result" for="time">100</output>
-          </form>
-
+            <input type="range" min=8 max= 1000 value="100" class = "slider" id = "time_scale">
+            <output id = "time_result" name="result" for="time">100</output> <br> <br>
+            <label for="frames"> Animate? </label>
+            <input type="checkbox" class = "checkbox" id="is_animate" onclick='this.blur(); animate_toggle();'>
+        </form>
+        <section id = "animate" class="section settings"><br>
+            <label for="customOutputName">Namespace: </label>
+			<input class="text-field" type="text" id="namespace" value = 'test', style='width:30%'><br>
+			<label for="customOutputName">Folder Path: </label>
+			<input class="text-field" type="text" id="folder" value = 'demo', style='width:45%'>
+            <form oninput="ppf_label.value=parseFloat(ppf.value)" class = "section">
+                <label for="ppf">Points Per Frame</label>
+                <input type="range" min=8 max= 100 value="100" class = "slider" id = "ppf" step = 1>
+                <output name="ppf_label" for="ppf">100</output>
+            </form>
+            <label for="context"> Global Context? </label>
+            <input type="checkbox" class = "checkbox" id="is_global" onclick='this.blur();'> <br> <br>
+        </section>
         <section id="equations" class="section">
             <label for="x1">X:</label>
             <input type="text" id="x1" class = "text-field" value="t*sin(t)" /><br>
@@ -53,7 +67,7 @@
             </select>
             <input type="button" class = "button" value="Draw" onclick='this.blur(); event.preventDefault(); draw();'>
             <input type="button" class = "button" value="Settings" onclick='this.blur(); settings_toggle();'>
-            <input type="button" class = "button" value="Export" onclick='this.blur(); exports();'>
+            <input type="button" class = "button" value="Export" onclick='this.blur(); draw(); exports();'>
         </section>
         <section id = "settings" class="section settings"><br>
             <div id = "particle-settings">
