@@ -8,7 +8,7 @@ if (image.complete) {
   image.addEventListener('load', loaded)
 }
 
-var ind = 0; var reps = 0; var block = -1; var blocks = [0]; var tsize = [0,0,0]; var structure; var resources;
+var ind = 0; var reps = 0; var block = -1; var blocks = [0]; var tsize = [0,0,0]; var structure; var resources; var renderer;
 function loaded() {
 	const blockDefinitions = {}
 	Object.keys(assets.blockstates).forEach(id => {
@@ -51,11 +51,57 @@ function loaded() {
     const pos_save_end = (cmd_box.value.slice(pos_save_start, pos_size_start - 5)).search("]") + pos_save_start + 1;
     const pos_size_end = (cmd_box.value.slice(pos_size_start, cmd_box.value.length)).search("]") + pos_size_start + 1;
     blocks = JSON.parse(cmd_box.value.slice(pos_save_start,pos_save_end));
-    var sorted = JSON.parse(cmd_box.value.slice(pos_save_start,pos_save_end));
     tsize = JSON.parse(cmd_box.value.slice(pos_size_start,pos_size_end));
     tsize[1]--;
 	console.log(tsize);
 	get_jsons("../json/1.17/blocks.json")
+
+    structure = new deepslate.Structure([0,0,0])
+    const canvas = document.getElementById('canvas')
+	const gl = canvas.getContext('webgl')
+	renderer = new deepslate.StructureRenderer(gl, structure, resources, { useInvisibleBlockBuffer: false })
+    console.log(renderer);
+    let viewDist = 10
+	let xRotation = 0.8
+	let yRotation = 0.5
+
+	function render() {
+		yRotation = yRotation % (Math.PI * 2)
+		xRotation = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, xRotation))
+		viewDist = Math.max(1, Math.min(500, viewDist))
+
+		const view = mat4.create()
+		mat4.translate(view, view, [0, 0, -viewDist])
+		mat4.rotate(view, view, xRotation, [1, 0, 0])
+		mat4.rotate(view, view, yRotation, [0, 1, 0])
+		mat4.translate(view, view, [-tsize[0] / 2, -tsize[1] / 2, -tsize[2] / 2])
+
+		renderer.drawStructure(view)
+	}
+	requestAnimationFrame(render)
+
+	let dragPos = null
+	canvas.addEventListener('mousedown', evt => {
+		if (evt.button === 0) {
+			dragPos = [evt.clientX, evt.clientY]
+		}
+	})
+	canvas.addEventListener('mousemove', evt => {
+		if (dragPos) {
+			yRotation += (evt.clientX - dragPos[0]) / 100
+			xRotation += (evt.clientY - dragPos[1]) / 100
+			dragPos = [evt.clientX, evt.clientY]
+			requestAnimationFrame(render)
+		}
+	})
+	canvas.addEventListener('mouseup', () => {
+		dragPos = null
+	})
+	canvas.addEventListener('wheel', evt => {
+		evt.preventDefault()
+		viewDist += evt.deltaY / 100
+		requestAnimationFrame(render)
+	})
 }
 
 var block_prop = {};
@@ -95,11 +141,11 @@ function get_jsons(block_list) { //transforms the blocks.json into a full length
     });
 }
 
+
 function finish_load() {
     var tlsize = [];
     tlsize[0] = tsize[0] + 5; tlsize[2] = tsize[2] + 5; tlsize[1] = tsize[1] + 5;
 	structure = new deepslate.Structure(tlsize)
-	const size = structure.getSize()
 	
 	//Domain Calculations
     var n_x = Math.floor(tsize[0] / 16);
@@ -133,53 +179,8 @@ function finish_load() {
         zi -= 16;
     }
     console.log("built");
-	const canvas = document.getElementById('canvas')
-	const gl = canvas.getContext('webgl')
-	const renderer = new deepslate.StructureRenderer(gl, structure, resources)
-	console.log("loaded");
-	let viewDist = 10
-	let xRotation = 0.8
-	let yRotation = 0.5
 
-	function render() {
-		yRotation = yRotation % (Math.PI * 2)
-		xRotation = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, xRotation))
-		viewDist = Math.max(1, Math.min(500, viewDist))
-
-		const view = mat4.create()
-		mat4.translate(view, view, [0, 0, -viewDist])
-		mat4.rotate(view, view, xRotation, [1, 0, 0])
-		mat4.rotate(view, view, yRotation, [0, 1, 0])
-		mat4.translate(view, view, [-size[0] / 2, -size[1] / 2, -size[2] / 2])
-
-		renderer.drawStructure(view)
-	}
-	requestAnimationFrame(render)
-
-	console.log("rendered");
-
-	let dragPos = null
-	canvas.addEventListener('mousedown', evt => {
-		if (evt.button === 0) {
-			dragPos = [evt.clientX, evt.clientY]
-		}
-	})
-	canvas.addEventListener('mousemove', evt => {
-		if (dragPos) {
-			yRotation += (evt.clientX - dragPos[0]) / 100
-			xRotation += (evt.clientY - dragPos[1]) / 100
-			dragPos = [evt.clientX, evt.clientY]
-			requestAnimationFrame(render)
-		}
-	})
-	canvas.addEventListener('mouseup', () => {
-		dragPos = null
-	})
-	canvas.addEventListener('wheel', evt => {
-		evt.preventDefault()
-		viewDist += evt.deltaY / 100
-		requestAnimationFrame(render)
-	})
+    renderer.setStructure(structure);
 }
 
 function zcurve_edge(x,y,z,edge_x,edge_z) {
