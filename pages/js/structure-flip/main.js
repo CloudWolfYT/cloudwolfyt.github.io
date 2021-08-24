@@ -95,7 +95,9 @@ function get_jsons(block_list) { //transforms the blocks.json into a full length
 }
 
 function finish_load() {
-	structure = new deepslate.Structure(tsize)
+    var tlsize = [];
+    tlsize[0] = tsize[0] + 5; tlsize[2] = tsize[2] + 5; tlsize[1] = tsize[1] + 5;
+	structure = new deepslate.Structure(tlsize)
 	const size = structure.getSize()
 	
 	//Domain Calculations
