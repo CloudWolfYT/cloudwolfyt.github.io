@@ -58,9 +58,11 @@ function loaded() {
 	get_jsons("../json/1.17/blocks.json")
 }
 
+var block_prop = {};
 function make_cube(x, y ,z) {
     if(reps <= 1) {
         block = blocks[ind];
+        block_prop = all_blocks.filter(obj => {return obj.id === block;})[0];
         ind--;
         if(blocks[ind] < 0) {
             reps = -(blocks[ind]);
@@ -70,8 +72,7 @@ function make_cube(x, y ,z) {
         reps--;
     }
     if(block > 0) {
-		var thing = all_blocks.filter(obj => {return obj.id === block;})[0];
-        structure.addBlock([x, y, z], thing.block, thing.properties)
+        structure.addBlock([x, y, z], block_prop.block, block_prop.properties)
     }
 }
 
