@@ -60,49 +60,48 @@ function loaded() {
     const canvas = document.getElementById('canvas')
 	const gl = canvas.getContext('webgl')
 	renderer = new deepslate.StructureRenderer(gl, structure, resources, { useInvisibleBlockBuffer: false })
-    console.log(renderer);
-    let viewDist = 10
-	let xRotation = 0.8
-	let yRotation = 0.5
-
-	function render() {
-		yRotation = yRotation % (Math.PI * 2)
-		xRotation = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, xRotation))
-		viewDist = Math.max(1, Math.min(500, viewDist))
-
-		const view = mat4.create()
-		mat4.translate(view, view, [0, 0, -viewDist])
-		mat4.rotate(view, view, xRotation, [1, 0, 0])
-		mat4.rotate(view, view, yRotation, [0, 1, 0])
-		mat4.translate(view, view, [-tsize[0] / 2, -tsize[1] / 2, -tsize[2] / 2])
-
-		renderer.drawStructure(view)
-	}
-	requestAnimationFrame(render)
-
-	let dragPos = null
-	canvas.addEventListener('mousedown', evt => {
-		if (evt.button === 0) {
-			dragPos = [evt.clientX, evt.clientY]
-		}
-	})
-	canvas.addEventListener('mousemove', evt => {
-		if (dragPos) {
-			yRotation += (evt.clientX - dragPos[0]) / 100
-			xRotation += (evt.clientY - dragPos[1]) / 100
-			dragPos = [evt.clientX, evt.clientY]
-			requestAnimationFrame(render)
-		}
-	})
-	canvas.addEventListener('mouseup', () => {
-		dragPos = null
-	})
-	canvas.addEventListener('wheel', evt => {
-		evt.preventDefault()
-		viewDist += evt.deltaY / 100
-		requestAnimationFrame(render)
-	})
 }
+
+let viewDist = 10
+let xRotation = 0.8
+let yRotation = 0.5
+function render() {
+    yRotation = yRotation % (Math.PI * 2)
+    xRotation = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, xRotation))
+    viewDist = Math.max(1, Math.min(500, viewDist))
+
+    const view = mat4.create()
+    mat4.translate(view, view, [0, 0, -viewDist])
+    mat4.rotate(view, view, xRotation, [1, 0, 0])
+    mat4.rotate(view, view, yRotation, [0, 1, 0])
+    mat4.translate(view, view, [-tsize[0] / 2, -tsize[1] / 2, -tsize[2] / 2])
+
+    renderer.drawStructure(view)
+}
+requestAnimationFrame(render)
+
+let dragPos = null
+canvas.addEventListener('mousedown', evt => {
+    if (evt.button === 0) {
+        dragPos = [evt.clientX, evt.clientY]
+    }
+})
+canvas.addEventListener('mousemove', evt => {
+    if (dragPos) {
+        yRotation += (evt.clientX - dragPos[0]) / 100
+        xRotation += (evt.clientY - dragPos[1]) / 100
+        dragPos = [evt.clientX, evt.clientY]
+        requestAnimationFrame(render)
+    }
+})
+canvas.addEventListener('mouseup', () => {
+    dragPos = null
+})
+canvas.addEventListener('wheel', evt => {
+    evt.preventDefault()
+    viewDist += evt.deltaY / 100
+    requestAnimationFrame(render)
+})
 
 var block_prop = {};
 function make_cube(x, y ,z) {
