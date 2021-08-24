@@ -62,7 +62,7 @@ var block_prop = {};
 function make_cube(x, y ,z) {
     if(reps <= 1) {
         block = blocks[ind];
-        block_prop = all_blocks.filter(obj => {return obj.id === block;})[0];
+        block_prop = all_blocks[block];
         ind--;
         if(blocks[ind] < 0) {
             reps = -(blocks[ind]);
