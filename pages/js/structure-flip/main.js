@@ -1,4 +1,4 @@
-const { mat4 } = glMatrix
+const { mat4, vec2, vec3 } = glMatrix
 
 const cmd_box = document.getElementById('cmd-box')
 const image = document.getElementById('atlas')
@@ -9,6 +9,7 @@ if (image.complete) {
 }
 
 var ind = 0; var reps = 0; var block = -1; var blocks = [0]; var tsize = [0,0,0]; var structure; var resources; var renderer;
+var cPos,cRot,cDist;
 function loaded() {
 	const blockDefinitions = {}
 	Object.keys(assets.blockstates).forEach(id => {
@@ -51,48 +52,79 @@ function loaded() {
     const canvas = document.getElementById('canvas')
 	const gl = canvas.getContext('webgl')
 	renderer = new deepslate.StructureRenderer(gl, structure, resources, { useInvisibleBlockBuffer: false })
+
+    cPos = [0, 0, 0] // set to center when loading new structure
+    cRot = [0.8, 0.5]
+    cDist = 10
+
+    render();
+    requestAnimationFrame(render)
+    
+    let dragPos = null
+    let dragButton
+    canvas.addEventListener('mousedown', evt => {
+        
+        dragPos = [evt.clientX, evt.clientY]
+        dragButton = evt.button
+    })
+    canvas.addEventListener('mousemove', evt => {
+        if (dragPos) {
+            const dx = (evt.clientX - dragPos[0]) / 100
+            const dy = (evt.clientY - dragPos[1]) / 100
+            if (dragButton === 0) {
+                vec2.add(cRot, cRot, [dx, dy])
+                cRot[0] = cRot[0] % (Math.PI * 2)
+                cRot[1] = clamp(cRot[1], -Math.PI / 2, Math.PI / 2)
+            } else if (dragButton === 2 || dragButton === 1) {
+                vec3.rotateY(cPos, cPos, [0, 0, 0], cRot[0])
+                vec3.rotateX(cPos, cPos, [0, 0, 0], cRot[1])
+                const d = vec3.fromValues(dx, -dy, 0)
+                vec3.scale(d, d, 0.25 * cDist)
+                vec3.add(cPos, cPos, d)
+                vec3.rotateX(cPos, cPos, [0, 0, 0], -cRot[1])
+                vec3.rotateY(cPos, cPos, [0, 0, 0], -cRot[0])
+                const size = this.structure.getSize()
+                clampVec3(cPos, [-size[0], -size[1], -size[2]], [0, 0, 0])
+            } else {
+                return
+            }
+            dragPos = [evt.clientX, evt.clientY]
+            this.render()
+        }
+    })
+    canvas.addEventListener('mouseup', evt => {
+        dragPos = null
+    })
+    canvas.addEventListener('contextmenu', evt => {
+        evt.preventDefault()
+    })
+    
+    function clamp(x, min, max) {
+        return Math.max(min, Math.min(max, x))
+    }
+    
+    function clampVec3(x, min, max) {
+        x[0] = clamp(x[0], min[0], max[0])
+        x[1] = clamp(x[1], min[1], max[1])
+        x[2] = clamp(x[2], min[2], max[2])
+    }
+
+    canvas.addEventListener('wheel', evt => {
+        evt.preventDefault()
+        cDist += evt.deltaY / 100
+        requestAnimationFrame(render)
+    })
 }
 
-let viewDist = 10
-let xRotation = 0.8
-let yRotation = 0.5
 function render() {
-    yRotation = yRotation % (Math.PI * 2)
-    xRotation = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, xRotation))
-    viewDist = Math.max(1, Math.min(500, viewDist))
-
     const view = mat4.create()
-    mat4.translate(view, view, [0, 0, -viewDist])
-    mat4.rotate(view, view, xRotation, [1, 0, 0])
-    mat4.rotate(view, view, yRotation, [0, 1, 0])
-    mat4.translate(view, view, [-tsize[0] / 2, -tsize[1] / 2, -tsize[2] / 2])
+    mat4.translate(view, view, [0, 0, -cDist])
+    mat4.rotateX(view, view, cRot[1])
+    mat4.rotateY(view, view, cRot[0])
+    mat4.translate(view, view, cPos)
 
     renderer.drawStructure(view)
 }
-requestAnimationFrame(render)
-
-let dragPos = null
-canvas.addEventListener('mousedown', evt => {
-    if (evt.button === 0) {
-        dragPos = [evt.clientX, evt.clientY]
-    }
-})
-canvas.addEventListener('mousemove', evt => {
-    if (dragPos) {
-        yRotation += (evt.clientX - dragPos[0]) / 100
-        xRotation += (evt.clientY - dragPos[1]) / 100
-        dragPos = [evt.clientX, evt.clientY]
-        requestAnimationFrame(render)
-    }
-})
-canvas.addEventListener('mouseup', () => {
-    dragPos = null
-})
-canvas.addEventListener('wheel', evt => {
-    evt.preventDefault()
-    viewDist += evt.deltaY / 100
-    requestAnimationFrame(render)
-})
 
 var block_prop = {};
 function make_cube(x, y ,z) {
