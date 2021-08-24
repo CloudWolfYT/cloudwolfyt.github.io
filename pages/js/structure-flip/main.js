@@ -45,15 +45,6 @@ function loaded() {
 		getDefaultBlockProperties(id) { return null },
 	}
 
-	/* My Structure Stuff */
-	const pos_save_start = cmd_box.value.search("save") + 5;
-    const pos_size_start = cmd_box.value.search("size") + 5;
-    const pos_save_end = (cmd_box.value.slice(pos_save_start, pos_size_start - 5)).search("]") + pos_save_start + 1;
-    const pos_size_end = (cmd_box.value.slice(pos_size_start, cmd_box.value.length)).search("]") + pos_size_start + 1;
-    blocks = JSON.parse(cmd_box.value.slice(pos_save_start,pos_save_end));
-    tsize = JSON.parse(cmd_box.value.slice(pos_size_start,pos_size_end));
-    tsize[1]--;
-	console.log(tsize);
 	get_jsons("../json/1.17/blocks.json")
 
     structure = new deepslate.Structure([0,0,0])
@@ -142,6 +133,16 @@ function get_jsons(block_list) { //transforms the blocks.json into a full length
 
 
 function finish_load() {
+    
+	/* My Structure Stuff */
+	const pos_save_start = cmd_box.value.search("save") + 5;
+    const pos_size_start = cmd_box.value.search("size") + 5;
+    const pos_save_end = (cmd_box.value.slice(pos_save_start, pos_size_start - 5)).search("]") + pos_save_start + 1;
+    const pos_size_end = (cmd_box.value.slice(pos_size_start, cmd_box.value.length)).search("]") + pos_size_start + 1;
+    blocks = JSON.parse(cmd_box.value.slice(pos_save_start,pos_save_end));
+    tsize = JSON.parse(cmd_box.value.slice(pos_size_start,pos_size_end));
+    tsize[1]--;
+    
     var tlsize = [];
     tlsize[0] = tsize[0] + 5; tlsize[2] = tsize[2] + 5; tlsize[1] = tsize[1] + 5;
 	structure = new deepslate.Structure(tlsize)
@@ -180,6 +181,7 @@ function finish_load() {
     console.log("built");
 
     renderer.setStructure(structure);
+    requestAnimationFrame(render)
 }
 
 function zcurve_edge(x,y,z,edge_x,edge_z) {
