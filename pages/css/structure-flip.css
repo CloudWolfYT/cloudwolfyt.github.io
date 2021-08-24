@@ -1,0 +1,71 @@
+@import "./general.css";
+.container {
+    width:60%; 
+    height: 300px;
+  }
+  .text-area {
+    width:48%; 
+    float:left; 
+    height: 100%;
+    margin: 0px;
+
+    outline: none;
+    padding: 3px 5px;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: 200ms;
+  }
+  .text-area:focus
+  {
+      border-color: var(--accent-color);
+      background: #0066ff33;
+  }
+  
+  .first-box {
+    width:48%; 
+    float:left; 
+    height: 100%;
+    margin: 0px;
+
+    outline: none;
+    padding: 3px 5px;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: 200ms;
+  }
+  
+  .second-box {
+    width:48%; 
+    height: 100%; 
+    float:right; 
+    margin: 0px;
+
+    outline: none;
+    padding: 3px 5px;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #555;
+    color: white;
+    font-size: 2.4vmin;
+    background: #444;
+    transition: 200ms;
+  }
+  
+  .first-box:focus
+  {
+      border-color: var(--accent-color);
+      background: #0066ff33;
+  }
+  .second-box:focus
+  {
+      border-color: var(--accent-color);
+      background: #0066ff33;
+  }
