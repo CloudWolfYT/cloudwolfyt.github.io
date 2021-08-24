@@ -132,7 +132,7 @@ function finish_load() {
         xi = x;
         zi -= 16;
     }
-
+    console.log("built");
 	const canvas = document.getElementById('canvas')
 	const gl = canvas.getContext('webgl')
 	const renderer = new deepslate.StructureRenderer(gl, structure, resources)
