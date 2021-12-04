@@ -25,6 +25,17 @@
 			<p class="description" style="font-size: 18px; margin-bottom: 10px;">Downloads come in zips. Inside is a folder. In that folder is the actual pack.</p>
 			<br>
 			<div class="downloads-container">
+				<div class="downloads-container">
+					<div class = "download-section">
+						<a href="https://github.com/cloudwolfyt/StarterPack/releases/download/V1.18/starterpack.zip"
+						class="button" onclick="this.blur();" id="dl_link">Download</a>
+						<span class="inner-title">Starter Pack</span>
+						<span class="description">A template for starting datapacks!</span>
+						<select class="select" onchange="this.blur(); change_link(this);">
+							<option value="StarterPack/releases/download/V1.18/starterpack.zip">1.18</option>
+						</select>
+						<button class="button" onclick='this.blur(); window.open("https://www.youtube.com/watch?v=1KPSfx3xSkY")' id="blob">YT Video</button>
+					</div>
 				<div class = "download-section">
 					<a href="https://api.github.com/repos/cloudwolfyt/math_lite/zipball/master"
 					class="button" onclick="this.blur();" id="dl_link">Download</a>
@@ -39,7 +50,6 @@
 					</select>
 					<button class="button" onclick='this.blur(); window.open("https://www.youtube.com/watch?v=Ky3OpQg6OsA")' id="blob">YT Video</button>
 				</div>
-			<div class="downloads-container">
 				<div class = "download-section">
 					<a href="https://api.github.com/repos/cloudwolfyt/ender_craft/zipball/master"
 					class="button" onclick="this.blur();" id="dl_link">Download</a>
